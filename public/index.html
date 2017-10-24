@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sentir, Responsive admin and dashboard UI kits template">
+    <meta name="keywords" content="admin,bootstrap,template,responsive admin,dashboard template,web apps template">
+    <meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
+    <title>并发症筛查</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+
+    <!--下拉框扁平化插件--->
+    <link rel="stylesheet" type="text/css" href="css/styleRestAPI.css"/>
+
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet"/>
+
+    <!--提示插件-->
+    <link rel="stylesheet" href="css/toastr.css">
+    <link href="css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <style>
+    	html {
+    		overflow: hidden;
+    	}
+        body{
+            height: 1080px;
+            width:1920px;
+            background-color: #4b6c8b;
+        }
+        .header{
+            width:100%;
+            height: 60px;
+            background-color: #3D5B77;
+            margin-left: auto;
+            margin-right: auto;
+            position:relative;
+            padding:0 0;
+            color: white;
+            font-family: 'Microsoft YaHei';
+        }
+        .container{
+            width: 100%;
+            height: 1020px;
+            padding: 40px 40px 30px 40px;
+            display: block;
+        }
+        .home-container .left-side {
+            float:left;
+            height: 948px;
+            width: 960px;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        .home-container .right-side {
+            float:right;
+            height: 100%;
+            width: 860px;
+            /*padding-right:20px;*/
+        }
+        .home-container .right-side-top {
+            height: 364px;
+            width: 100%;
+            background-color: #ffffff;
+        }
+        .home-container .right-side-bottom {
+            height: 564px;
+            width: 100%;
+            background-color: #ffffff;
+            margin-top: 20px;
+        }
+        .home-container .left-side-top {
+            height: 414px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .home-container .left-side-bottom{
+            height: 474px;
+            width:100%;
+            margin-top: 20px;
+        }
+        .inside-container .left-side{
+            float: left;
+            width:850px;
+            height:100%;
+        }
+        .inside-container .right-side{
+            float: right;
+            width:970px;
+            height:100%;
+            margin-left:20px;
+        }
+        .inside-container .left-side-top,.right-side-top{
+            width:100%;
+            height: 476px;
+            background-color: #ffffff;
+        }
+        .inside-container .left-side-bottom,.right-side-bottom{
+            width:100%;
+            height: 444px;
+            background-color: #ffffff;
+            margin-top:20px;
+        }
+        .header-title{
+            color: #ffffff;
+            font-size: 28px;
+            line-height: 1em;
+            padding: 16px 0;
+            text-align: center;
+        }
+        .header-time{
+            position: absolute;
+            right:0;
+            top:0;
+            padding-top:8px;
+            padding-right:8px;
+            text-align: right;
+            height:60px;
+            background-color: rgb(39, 43, 51);
+            display: inline-block;
+            width: 164px;
+            color: #ffffff;
+        }
+        .header-time span:first-child{
+            font-size: 16px;
+            line-height: 1em;
+        }
+        .header-time span:last-child{
+            font-size: 24px;
+            line-height: 1em;
+        }
+        .back-first-screen{
+            position: absolute;
+            width: 168px;
+            height: 60px;
+            float: left;
+            display: inline;
+            text-align: center;
+        }
+        .back-first-screen a{
+            width:168px;
+            display: block;
+            color: #ffffff;
+            font-size: 22px;
+            height: 60px;
+            padding: 16px 0;
+        }
+        .back-first-screen span{
+            font-size: 22px;
+            line-height: 1em;
+        }
+        .back-first-screen  i{
+            font-size: 30px;
+        }
+        body{
+            font-family:  Arial,Microsoft YaHei;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header clearfix">
+    <!--返回按钮-->
+    <div class="back-first-screen hide">
+        <a href="#" class="ui-link">
+            <i class="fa fa-angle-left"></i>&nbsp;&nbsp;返回首页
+        </a>
+    </div>
+
+    <!--title-->
+    <div class="header-title">
+            上海市代谢性疾病（糖尿病）预防和诊治服务体系建设
+    </div>
+    <!--时间-->
+    <div class="header-time">
+        <span id="time-ymd">--年 --月 --日</span><br/>
+        <span id="time-hms">-- --</span>&nbsp;
+    </div>
+</div>
+
+<div class="container">
+    <!--首页容器 START-->
+    <div class="home-container clearfix">
+        <div class="left-side">
+            <div class="left-side-top"></div>
+            <div class="left-side-bottom"></div>
+        </div>
+        <div class="right-side">
+            <div class="right-side-top"></div>
+            <div class="right-side-bottom" id="first-screen-right-bottom" style="padding:0"></div>
+        </div>
+    </div>
+
+    <!--内容页容器 START-->
+    <div class="inside-container hide clearfix">
+        <div class="left-side">
+            <div class="left-side-top"></div>
+            <div class="left-side-bottom"></div>
+        </div>
+        <div class="right-side">
+            <div class="right-side-top"></div>
+            <div class="right-side-bottom"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+</footer>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!--common script for all pages-->
+<script src="js/echarts.min.js"></script>
+
+<!--提示插件-->
+<script src="js/toastr.js"></script>
+<!-- 滑动插件-->
+<script src="js/jquery.alerts.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function(){
+        // header宽度加载
+        var width=window.innerWidth;
+        $('header').width(width);
+
+        // 注册返回按钮点击事件
+        $('.back-first-screen').on('click', function(e){
+            // 隐藏返回首页按钮
+            $('.back-first-screen').addClass('hide');
+            // 切换
+            $('.home-container').removeClass('hide');
+            $('.inside-container').addClass('hide');
+        });
+
+        // 注册工作概况点击事件
+        $('.home-container .left-side-top').on('click', function(e) {
+            // 切换
+            $('.home-container').addClass('hide');
+            $('.inside-container').removeClass('hide');
+
+            // 展示返回首页按钮
+            $('.back-first-screen').removeClass('hide');
+            loadInsidePage();
+        });
+        // 首屏页面模块加载
+        loadFirstScreen();
+        // 实时展示时间
+        showtime();
+    });
+
+    //加载模块div
+    function loadFirstScreen() {
+        $('#first-screen-right-bottom').load('pages/home_page/right-side-bottom.html');
+    }
+
+    // 浏览器实时显示时间
+    function showtime(){
+        var today,hour,second,minute,year,month,date;
+        today=new Date();
+        year = today.getFullYear();
+        month = today.getMonth()+1;
+        date = today.getDate();
+        hour = today.getHours();
+        minute =today.getMinutes();
+        second = today.getSeconds();
+        if(month<10) month="0"+month;
+        if(date<10) date="0"+date;
+        if(hour<10) hour="0"+hour;
+        if(minute<10) minute="0"+minute;
+        if(second<10) second="0"+second;
+        var ymdStr = year + "年" + month + "月" + date + "日 ";
+        var hmsStr = hour + ":" + minute + ":" + second;
+        $('#time-ymd').text(ymdStr);
+        $('#time-hms').text(hmsStr);
+        setTimeout("showtime();", 1000); //设定函数自动执行时间为 1000 ms(1 s)
+    }
+
+    // 加载页面
+    function loadInsidePage() {
+        $('.inside-container .left-side-top').load('pages/inside/left-inside-top.html');
+        $('.inside-container .right-side-bottom').load('pages/inside/right-inside-bottom.html');
+        $('.inside-container .left-side-bottom').load('pages/inside/left-inside-bottom.html');
+        $('.inside-container .right-side-top').load('pages/inside/right-inside-top.html');
+    }
+
+    // 加载首屏页面模块
+    function loadFirstScreen() {
+        //工作排名
+        $('.home-container .left-side-bottom').load('pages/home/left-side-bottom.html');
+        $('.home-container .right-side-bottom').load('pages/home/right-side-bottom.html');
+        //情况分析
+        $('.home-container .right-side-top').load('pages/home/right-side-top.html');
+
+        // 工作概况
+        $('.home-container .left-side-top').load('pages/home/left-side-top.html');
+    }
+</script>
+</body>
+</html>

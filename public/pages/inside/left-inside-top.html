@@ -1,0 +1,164 @@
+<style>
+    .modal-title p {
+        font-size: 27px;
+        color: #fff;
+        text-align: center;
+        font-family: 'Microsoft YaHei';
+    }
+
+    .modal-title {
+        padding: 24px 0 0 0;
+    }
+
+    .area p {
+        font-family: 'Microsoft YaHei';
+        color: #629be6;
+        text-align: center;
+        padding: 22px 40px 0px 40px;
+        font-size: 18px;
+    }
+    .area {
+        height: 72px;
+        width: 140px;
+        margin-top: -339px;
+        background-color:#f6f9fe;
+        border: 1px solid;
+        border-color: #EAEAEA;
+    }
+    .area-csl1 {
+        margin-left: 190px;
+        margin-top: 17px;
+    }
+    .area-csl2 {
+        margin-left: 345px;
+        margin-top: 17px;
+    }
+    .area-csl3 {
+         margin-left: 500px;
+         margin-top: 17px;
+     }
+    .area-csl4 {
+        margin-left: 655px;
+        margin-top: 17px;
+    }
+
+    .all-area p {
+        color: #fff;
+        font-family: 'Microsoft YaHei';
+        font-size: 18px;
+        text-align: center;
+        padding: 159px 0;
+
+    }
+    .all-area {
+        height: 338px;
+        width: 142px;
+        background-color: #629be6;
+        margin-left: 30px;
+    }
+    .finish {
+        background: url('img/inside/finish.png') no-repeat right top;
+    }
+
+    .area{
+        cursor: pointer;
+    }
+</style>
+
+<div class="all-top">
+    <div class="modal-title">
+        <p>
+            <span class="model-title-icon"><img src="img/inside/icon.png" alt="icon"></span> 糖尿病并发症筛查—工作概况
+        </p>
+    </div>
+    <div class="modal-body">
+        <div class="all-area " style="cursor: pointer" onclick="regionalSwitch(this,0)">
+            <p> 全上海</p>
+        </div>
+        <div class="area " style=" margin-left: 190px;" onclick="regionalSwitch(this,1)">
+            <p >长宁区</p>
+        </div>
+        <div class="area area-csl1"  onclick="regionalSwitch(this,5)">
+            <p>黄浦区</p>
+        </div>
+        <div  class="area area-csl1" onclick="regionalSwitch(this,9)">
+            <p>闵行区</p>
+        </div>
+        <div class="area area-csl1" onclick="regionalSwitch(this,13)">
+            <p>松江区</p>
+        </div>
+        <div class="area" style="margin-left: 345px;"onclick="regionalSwitch(this,2)">
+            <p >静安区</p>
+        </div>
+        <div class="area area-csl2"   onclick="regionalSwitch(this,6)">
+            <p >虹口区</p>
+        </div>
+        <div class="area area-csl2"  onclick="regionalSwitch(this,10)">
+            <p>宝山区</p>
+        </div>
+        <div class="area area-csl2"  onclick="regionalSwitch(this,14)">
+            <p>青浦区</p>
+        </div>
+        <div class="area" style="margin-left: 500px;" onclick="regionalSwitch(this,3)">
+            <p >徐汇区</p>
+        </div>
+        <div class="area area-csl3"  onclick="regionalSwitch(this,7)">
+            <p  style="padding: 22px 32px 0px 26px">浦东新区</p>
+        </div>
+        <div class="area area-csl3"  onclick="regionalSwitch(this,11)">
+            <p>嘉定区</p>
+        </div>
+        <div  class="area area-csl3"  onclick="regionalSwitch(this,15)">
+            <p>奉贤区</p>
+        </div>
+        <div class="area"  style="margin-left: 655px;" onclick="regionalSwitch(this,4)">
+            <p>普陀区</p>
+        </div>
+        <div class="area area-csl4"  onclick="regionalSwitch(this,8)">
+            <p>杨浦区</p>
+        </div>
+        <div class="area area-csl4"  onclick="regionalSwitch(this,12)">
+            <p>金山区</p>
+        </div>
+        <div class="area area-csl4"  onclick="regionalSwitch(this,16)">
+            <p>崇明区</p>
+        </div>
+    </div>
+</div>
+<script>
+    //行政区域按钮切换
+    function regionalSwitch(v,type) {
+        $(v).css('background-color','#629be6');
+        $(v).find('p').css('color','#fff');
+        $(v).siblings().css('background-color','#F6F9FE');
+        $(v).siblings().find('p').css('color','#629be6');
+        if(type == 0){
+            $('#left-title').text('全市糖尿病并发症筛查工作进度分析');
+            $('#right-title').text('全市糖尿病并发症筛查完成情况');
+            $('#right-top-title').text('全市糖尿病并发症筛查工作概况');
+        }else{
+            $('#left-title').text(' '+ $(v).text().trim() + '糖尿病并发症筛查工作进度分析');
+            $('#right-title').text(' '+  $(v).text().trim() + '糖尿病并发症筛查完成情况');
+            $('#right-top-title').text(' '+  $(v).text().trim() +'糖尿病并发症筛查工作概况');
+        }
+        // 进度分析,完成情况默认第一个tab选中
+        if(!$('.analysis-rules .btn-sm:first').hasClass('btn-active')) {
+            $('.analysis-rules .btn-sm:first').addClass('btn-active');
+            $('.analysis-rules .btn-sm:first').siblings().removeClass('btn-active');
+        }
+        if(!$('.disease-rules .btn-sm:first').hasClass('btn-active')) {
+            $('.disease-rules .btn-sm:first').addClass('btn-active');
+            $('.disease-rules .btn-sm:first').siblings().removeClass('btn-active');
+        }
+        if(!$('.time-rules .btn-sm:first').hasClass('btn-active')) {
+            $('.time-rules .btn-sm:first').addClass('btn-active');
+            $('.time-rules .btn-sm:first').siblings().removeClass('btn-active');
+        }
+        //默认获取第一个tab的数据
+        getgoalsNumber(0);//工作进度分析
+        getStatusData(0, 'MONTH');//工作完成情况
+        disAreaScreenWorkgeneral($(v).find('p').text()); // 工作概况
+    }
+
+
+</script>

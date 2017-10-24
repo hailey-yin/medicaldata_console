@@ -1,0 +1,473 @@
+<style>
+    .rank-page-left {
+        float: left;
+        width: 118px;
+    }
+    .select-item {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+    .select-item:hover {
+        color: #262626;
+        text-decoration: none;
+        background-color: #f5f5f5;
+    }
+    #selected-county {
+        width: 84px;
+        height: 34px;
+        background-color: #43b6f5;
+        color: #ffffff;
+        font-size: 16px;
+    }
+    #select-icon {
+        width: 30px;
+        height: 34px;
+        background-color: #43b6f5;
+        color: #ffffff;
+        font-size: 16px;
+    }
+    .rank-page-title {
+        width: 118px;
+        color: #718AA6;
+        font-size: 24px;
+        text-align: center;
+    }
+    .rank-title-icon img{
+        margin: 20px 0px;
+    }
+    .rank-title > span {
+        line-height:26px;
+        display: block;
+        margin: 0;
+        padding:0;
+    }
+    .rank-page-right {
+        width: 790px;
+        float: left;
+        margin-left: 10px;
+        display: inline;
+    }
+
+    .rank-table-div,.rank-rules {
+        float: left;
+    }
+
+    table {
+        width: 746px;
+        color:#718AA6;
+    }
+
+    table thead tr {
+        background: #45C8DC;
+        color: #fff;
+    }
+
+    table thead > tr > th, table tbody > tr > th, table thead > tr > td, table tbody > tr > td {
+        padding: 3px;
+        text-align: center;
+        height: 26px;
+    }
+
+    table tbody tr:nth-child(odd){
+        background-color: #F0F0F0;
+        border: 1.5px solid #f0f0f0;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #ffffff;
+        border: 1.5px solid #f0f0f0;
+    }
+
+    table > thead > tr > th {
+        border-bottom: 0px solid #ddd;
+        vertical-align: bottom;
+        font-weight: normal;
+    }
+    table tbody tr th {
+        font-weight: normal;
+        border: none;
+    }
+
+    .rank-rules {
+        margin-top: 25px;
+    }
+
+    .rank-rules > .btn {
+        border-radius: 0;
+        width: 40px;
+        height: 83px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #ffffff;
+        border: 1.5px solid #f0f0f0;
+        color:#718AA6;
+        cursor: pointer;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .rank-rules > .btn:hover {
+        background-color: #f0f0f0;
+    }
+
+    .rank-rules > .btn-active, .rank-rules > .btn-active:hover {
+        background-color: #D5E3F9;
+    }
+
+    .rank-rules > button > span {
+        line-height:15px;
+        display: block;
+        margin: 0;
+        padding:0;
+    }
+
+    .rule-button {
+        cursor: pointer;
+    }
+
+    .page-button {
+        margin-top: 442px;
+    }
+
+    .page-button button {
+        border-radius: 0;
+        width: 10px;
+        height: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        background-color: #ffffff;
+        border: none;
+        color:#718AA6;
+        cursor: pointer;
+        padding: 0px;
+        text-align: center;
+    }
+
+</style>
+<div class="rank-page-left">
+    <!--区县下拉框-->
+    <div class="btn-group">
+        <button id="selected-county" type="button" class="btn btn-flat">全上海</button>
+        <button id="select-icon" type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
+            <span class="fa fa-caret-down"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li class="select-item">全上海</li>
+            <li class="select-item">黄浦区</li>
+            <li class="select-item">徐汇区</li>
+            <li class="select-item">长宁区</li>
+            <li class="select-item">静安区</li>
+            <li class="select-item">普陀区</li>
+            <li class="select-item">虹口区</li>
+            <li class="select-item">杨浦区</li>
+            <li class="select-item">浦东新区</li>
+            <li class="select-item">闵行区</li>
+            <li class="select-item">宝山区</li>
+            <li class="select-item">嘉定区</li>
+            <li class="select-item">金山区</li>
+            <li class="select-item">松江区</li>
+            <li class="select-item">青浦区</li>
+            <li class="select-item">奉贤区</li>
+            <li class="select-item">崇明区</li>
+        </ul>
+    </div>
+    <div class="rank-page-title">
+        <span class="rank-title-icon"><img src="img/home/arrow.png" alt="icon"></span>
+        <div class="rank-title">
+            <span>糖</span>
+            <span>尿</span>
+            <span>病</span>
+            <span>并</span>
+            <span>症</span>
+            <span>筛</span>
+            <span>查</span>
+            <span>各</span>
+            <span>区</span>
+            <span>工</span>
+            <span>作</span>
+            <span>排</span>
+            <span>名</span>
+        </div>
+    </div>
+</div>
+<div class="rank-page-right">
+    <div class="rank-table-div">
+        <table id="rank-table">
+            <thead id="rank-table-head"></thead>
+            <tbody id="rank-table-body"></tbody>
+        </table>
+    </div>
+    <div class="rank-rules">
+        <button type="button" class="btn btn-sm btn-active" value="0">
+            <span>完</span>
+            <span>成</span>
+            <span>率</span>
+            <span>排</span>
+            <span>行</span>
+        </button>
+        <br>
+        <button type="button" class="btn btn-sm" value="1">
+            <span>完</span>
+            <span>成</span>
+            <span>人</span>
+            <span>数</span>
+        </button>
+    </div>
+    <div class="page-button">
+        <button class="btn-active" value="0"><</button>
+        <span id="current-page">1</span>
+        <button value="1">></button>
+    </div>
+</div>
+<script>
+    var CompletionPopulation = []; //完成人数队列
+    var CompletionPopulationRank = []; //完成人数排行队列
+    var TargetPopulation = [{county:'黄浦区',num:[0,0,0]},{county:'徐汇区',num:[0,0,0]},{county:'长宁区',num:[0,0,0]},{county:'静安区',num:[0,0,0]},{county:'普陀区',num:[0,0,0]},{county:'虹口区',num:[0,0,0]},{county:'杨浦区',num:[0,0,0]},{county:'浦东新区',num:[0,0,0]},{county:'闵行区',num:[0,0,0]},{county:'宝山区',num:[0,0,0]},{county:'嘉定区',num:[0,0,0]},{county:'金山区',num:[0,0,0]},{county:'松江区',num:[0,0,0]},{county:'青浦区',num:[0,0,0]},{county:'奉贤区',num:[0,0,0]},{county:'崇明区',num:[0,0,0]}];//完成人数队列
+    var CompletionRate = [];//完成率队列
+    var County = $("#selected-county").text();//当前区县
+    var RankRule = $('.rank-rules > .btn-active').attr('value');//右侧排行规则,0完成率排行1完成人数排行
+    var RankColumn = 0;//表头排行规则,0筛查周围神经,1血管,2视网膜,3肾病,4血糖
+    var PageNum = 1;//table页数
+    var CurPage = 1;//当前所在table页数
+    var PageSize = 16;//每页显示行数
+
+    $(function(){
+        //获取数据
+        getData();
+        //定时刷新数据
+        setInterval(getData,500000);
+        //标头初始化
+        initThead();
+        //下拉框点击事件
+        $('.select-item').click(function() {
+            $("#selected-county").text(($(this).text()));
+            County = $("#selected-county").text();
+            if(County != '全上海'){
+                $('.rank-rules button:first').css('display','none');
+                $('.rank-rules br').css('display','none');
+                $('.rank-rules button:first').removeClass("btn-active");
+                $('.rank-rules button:first').siblings().addClass("btn-active");
+            } else {
+                $('.rank-rules button:first').css('display','');
+                $('.rank-rules br').css('display','');
+                resetRightRules();
+            }
+            CurPage = 1;
+            $('#current-page').text(CurPage);
+            RankRule = $('.rank-rules > .btn-sm.btn-active').attr('value');
+            getData();
+            initThead();
+        });
+        //右侧排行规则点击事件
+        $('.btn-sm').click(function() {
+            $(this).addClass("btn-active");
+            $(this).siblings().removeClass("btn-active");
+            RankRule = $('.rank-rules > .btn-active').attr('value');
+            renderData();
+        });
+        //表头排序规则点击事件(表头重新生成后click事件失效，改用此方法)
+        $("#rank-table").on("click",".rule-button",function(){
+            if(!$(this).children().hasClass('fa-caret-up')) {
+                $(this).children().removeClass('fa-caret-down');
+                $(this).children().addClass('fa-caret-up');
+                $(this).siblings().children().removeClass('fa-caret-up');
+                $(this).siblings().children().addClass('fa-caret-down');
+                RankColumn = $(this).attr('value');
+            }
+            dataRank();
+        });
+        //table医院列鼠标悬浮事件
+        $("#rank-table").on("mouseover","#hospital-col",function() {
+            if(County != '全上海') {
+                var index = $(this).parent().children().eq(1).text() - 1;
+                $(this).parent().children().eq(2).attr('title',CompletionPopulation[index]['county']);
+            }
+        });
+        //table医院列鼠标离开事件
+        $("#rank-table").on("mouseout","#hospital-col",function() {
+            if(County != '全上海' && $(this).parent().children().eq(2).text() != '     ' && $(this).parent().children().eq(2).text().length>6) {
+                var index = $(this).parent().children().eq(1).text() - 1;
+                $(this).parent().children().eq(2).text(CompletionPopulation[index]['county'].substr(0,5)+"...");
+            }
+        });
+        //table翻页
+        $(".page-button button").click(function(){
+            $(this).addClass("btn-active");
+            $(this).siblings().removeClass("btn-active");
+            if($('.page-button > .btn-active').attr('value') == 0 && CurPage>1) { //左翻
+                CurPage = CurPage - 1;
+            } else if($('.page-button > .btn-active').attr('value') == 1 && CurPage<PageNum) { //右翻
+                CurPage = CurPage + 1;
+            }
+            $('#current-page').text(CurPage);
+            renderData();
+        })
+    });
+
+    function getData(){
+        $.getJSON('api/home/jobranking?location='+County, function(rm) {
+            if(rm.code === 1) {
+                CompletionPopulation = rm.result;
+                PageNum = CompletionPopulation.length%16==0 ?Math.floor(CompletionPopulation.length/16):Math.floor(CompletionPopulation.length/16)+1;
+                CompletionPopulationRank = [];
+                for(var i=0; i<CompletionPopulation.length; i++) {
+                    CompletionPopulationRank.push(CompletionPopulation[i]);
+                }
+                if (rm.result) {
+                    if(County == '全上海') {
+                        $.getJSON('api/dataentry/complications', function(rm) {
+                            if(rm.code === 1) {
+                                if (rm.result) {
+                                    for(var i=0; i<TargetPopulation.length; i++) {
+                                        for(var j=0; j<rm.result.length; j++) {
+                                            rm.result[j]['county'] = rm.result[j]['county']=='崇明县'?'崇明区':rm.result[j]['county'];
+                                            if(TargetPopulation[i]['county'] == rm.result[j]['county']) {
+                                                TargetPopulation[i]['num'][0] = rm.result[j]['task'];
+                                                TargetPopulation[i]['num'][1] = rm.result[j]['task'];
+                                                TargetPopulation[i]['num'][2] = rm.result[j]['task'];
+                                                TargetPopulation[i]['num'][3] = rm.result[j]['task'];
+                                                TargetPopulation[i]['num'][4] = rm.result[j]['task'];
+                                            }
+                                        }
+                                    }
+                                }
+                                //计算完成率
+                                rateCompute();
+                                //获取情况分析数据
+                                getAnalysisData()
+                            }else {
+                                toastr(api + '数据获取失败')
+                            }
+                        });
+                    } else {
+                        dataRank();
+                    }
+                }
+            }else {
+                toastr(api + '数据获取失败')
+            }
+        });
+    }
+
+
+    //计算完成率
+    function rateCompute() {
+        CompletionRate = [];//完成率队列
+        for(var i=0; i<CompletionPopulation.length; i++) {
+            if(TargetPopulation[i]['num'][0]) {
+                var nerveRate = Math.round(CompletionPopulation[i]['num'][0]/TargetPopulation[i]['num'][0]*100);
+                var vesselRate = Math.round(CompletionPopulation[i]['num'][1]/TargetPopulation[i]['num'][1]*100);
+                var retinaRate = Math.round(CompletionPopulation[i]['num'][2]/TargetPopulation[i]['num'][2]*100);
+                var nephropathyRate = Math.round(CompletionPopulation[i]['num'][3]/TargetPopulation[i]['num'][3]*100);
+                var sugerRate = Math.round(CompletionPopulation[i]['num'][4]/TargetPopulation[i]['num'][4]*100);
+                CompletionRate.push({county: CompletionPopulation[i]['county'],num:[nerveRate,vesselRate,retinaRate,nephropathyRate,sugerRate]})
+            } else {
+                CompletionRate.push({county: CompletionPopulation[i]['county'],num:[0,0,0,0,0]});
+            }
+        }
+        //数据排序
+        dataRank();
+    }
+
+    //数据排序
+    function dataRank() {
+        if(RankRule == 0) {
+            CompletionRate.sort(compare('num'));
+        } else {
+            CompletionPopulationRank.sort(compare('num'));
+        }
+        //table数据渲染
+        renderData();
+    }
+
+    //table数据渲染
+    function renderData() {
+        var html = '';
+        if(RankRule == '0') { //按完成率排行
+            for(var i=0; i<PageNum*16; i++) {
+                html += '<tr>'
+                        +'<th></th>'
+                        +'<th>'+ (CompletionRate[i]?(i+1):'    ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['county']:'     ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['num'][0]+'%':'     ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['num'][1]+'%':'     ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['num'][2]+'%':'     ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['num'][3]+'%':'     ') +'</th>'
+                        +'<th>'+ (CompletionRate[i]?CompletionRate[i]['num'][4]+'%':'     ') +'</th>'
+                        +'</tr>';
+            }
+        } else { //按完成人数排行
+            var population = (RankColumn != -1)? CompletionPopulationRank:CompletionPopulation;
+            for(var i=16*(CurPage-1); i<16*CurPage; i++) {
+                var text = population[i]?(population[i]['county'].length>6?population[i]['county'].substr(0,5)+ '...':population[i]['county']):'     ';
+                html += '<tr>'
+                        +'<th></th>'
+                        +'<th>'+ (population[i]?(i+1):'    ') +'</th>'
+                        +'<th id="hospital-col">'+ text +'</th>'
+                        +'<th>'+ (population[i]?population[i]['num'][0]+'人':'     ') +'</th>'
+                        +'<th>'+ (population[i]?population[i]['num'][1]+'人':'     ') +'</th>'
+                        +'<th>'+ (population[i]?population[i]['num'][2]+'人':'     ')
+                        +'<th>'+ (population[i]?population[i]['num'][3]+'人':'     ') +'</th>'
+                        +'<th>'+ (population[i]?population[i]['num'][4]+'人':'     ')
+                        +'</tr>';
+            }
+        }
+        $('#rank-table-body').empty();
+        $('#rank-table-body').append(html);
+    }
+
+    //表头初始化
+    function initThead() {
+        var secondColumn = County == '全上海'?'区县':'医院';
+        var html = '<tr>'
+                +'<th></th>'
+                +'<th>排名</th>'
+                +'<th>' + secondColumn + '</th>'
+                +'<th class="rule-button" value="0">周围神经<span class="fa fa-caret-up" style="margin:0 10px"></span></th>'
+                +'<th class="rule-button" value="1">血管<span class="fa fa-caret-down" style="margin:0 10px"></span></th>'
+                +'<th class="rule-button" value="2">视网膜<span class="fa fa-caret-down" style="margin:0 10px"></span></th>'
+                +'<th class="rule-button" value="3">肾病<span class="fa fa-caret-down" style="margin:0 10px"></span></th>'
+                +'<th class="rule-button" value="4">血糖<span class="fa fa-caret-down" style="margin:0 10px"></span></th>'
+                +'</tr>';
+        $('#rank-table-head').empty();
+        $('#rank-table-head').append(html);
+    }
+
+    //重置右侧tab
+    function resetRightRules() {
+        $('.rank-rules button:first').addClass('btn-active');
+        $('.rank-rules button:first').siblings().removeClass("btn-active");
+    }
+
+    //排序算法(降序排列),property 排序关键字
+    function compare(property) {
+        return function(object1,object2) {
+            if(RankColumn == -1) { //默认排行
+                var num1 = object1[property][0] + object1[property][1] + object1[property][2] + object1[property][3] + object1[property][4];
+                var num2 = object2[property][0] + object2[property][1] + object2[property][2] + object1[property][3] + object1[property][4];
+            } else if(RankColumn == 0) { //按筛查任务排行
+                var num1 = object1[property][0];
+                var num2 = object2[property][0]
+            } else if(RankColumn == 1) { //按评估风险任务排行
+                var num1 = object1[property][1];
+                var num2 = object2[property][1]
+            } else if(RankColumn == 2) { //按评估风险任务排行
+                var num1 = object1[property][2];
+                var num2 = object2[property][2]
+            } else if(RankColumn == 3) { //按评估风险任务排行
+                var num1 = object1[property][3];
+                var num2 = object2[property][3]
+            } else { //按评估风险任务排行
+                var num1 = object1[property][4];
+                var num2 = object2[property][4]
+            }
+            return num2 - num1;
+        }
+    }
+</script>

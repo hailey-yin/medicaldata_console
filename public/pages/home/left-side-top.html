@@ -1,0 +1,604 @@
+<style>
+.screen-work-general{
+    display: inline-block;
+}
+.general-title-card {
+    height:415px;
+    width:200px;
+    background-color: #e99d59;
+    color: #ffffff;
+    padding-top: 80px;
+    float:left;
+}
+.general-title-card-logo div{
+    height: 50px;
+    width:50px;
+    margin: 0 auto;
+}
+.general-title-card-title {
+    font-size: 27px;
+    text-align: center;
+    margin-top: 20px;
+}
+.general-title-card-descri {
+    text-align: center;
+    font-size: 16px;
+    width:180px;
+    margin: 25px auto 0 auto;
+}
+.work-general-container {
+    width:707px;
+    margin-left:12px;
+    height:415px;
+    background-color: #3D5B77;
+    padding: 20px 0 0 0;
+    float: right;
+}
+.work-general-title {
+    font-size: 26px;
+    line-height: 1em;
+    color: #ffffff;
+    text-align: center;
+}
+.work-general-title img {
+    height: 25px;
+    width: 25px;
+    vertical-align: top;
+}
+.tube-container {
+    width: 707px;
+    height: 368px;
+    display: inline-block;
+    position: absolute;
+    padding-top: 30px;
+}
+.nerve-tube{
+    position: absolute;
+    left: 25px;
+    width: 100px;
+}
+.artery-tube{
+    position: absolute;
+    left: 165px;
+}
+.retina-tube {
+    position: absolute;
+    left: 305px;
+}
+.kidney-tube{
+    position: absolute;
+    left: 445px;
+}
+.blood-sugar-tube{
+    position: absolute;
+    left: 585px;
+}
+.tube-title {
+    margin-top: 60px;
+    width: 20px;
+    text-align: center;
+    float:left;
+}
+.tube-title i{
+    height: 12px;
+    width: 12px;
+    color: #ffffff;
+}
+.tube-title div{
+    font-size: 16px;
+    color: #ffffff;
+    width: 20px;
+    line-height: 1.2em;
+}
+.tube{
+    margin-left: 10px;
+    margin-right:10px;
+    width: 60px;
+    height: 240px;
+    float: right;
+}
+.tube-overflow{
+    height: 20px;
+    width:45px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+.overflow-back{
+    width:45px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10000;
+    height: 20px;
+    background-color: #3d5b77;
+}
+.overflow-filling{
+    width:45px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 100;
+    height: 20px;
+    background-color: #e99d59;
+}
+.tube-body{
+    width:58px;
+    height: 220px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+.tube-filling{
+    position: absolute;
+    z-index: 100;
+    width:58px;
+    height: 220px;
+    background: url("img/home/tube.png") no-repeat;
+}
+.tube-back {
+    position: absolute;
+    height: 220px;
+    width: 58px;
+    z-index: 1000;
+    background: url("img/home/tube2.png") no-repeat;
+}
+.tube-percent{
+    position: absolute;
+    z-index: 10000;
+    height: 220px;
+    width: 58px;
+    font-size: 12px;
+    line-height: 1em;
+    color: #ffffff;
+}
+.tube-percent div{
+    text-align: center;
+    margin-top: 43px;
+}
+.tube-percent div:first-child{
+    margin-top:1px
+}
+.tube-percent div:last-child{
+    margin-top:35px
+}
+.rule-dot {
+    margin-top: 36px !important;
+}
+
+.tube-descri{
+    width: 200px;
+    margin: 20px auto 0 auto;
+    height: 50px;
+    text-align: center;
+    position: absolute;
+    margin-left: -40px;
+}
+.tube-descri .target,.tube-descri .complete-number {
+    font-size: 12px;
+    line-height: 1em;
+    color: #ffffff;
+    margin-top:8px;
+}
+.tube-descri .complete-percentage{
+    margin-top:8px;
+    color: #01cbff;
+    font-size: 14px;
+    line-height: 1em;
+}
+</style>
+<div class="screen-work-general clearfix">
+    <div class="general-title-card">
+        <!--logo-->
+        <div class="general-title-card-logo">
+            <div>
+                <img alt="logo" src="img/home/icon_diabetes.png"/>
+            </div>
+        </div>
+        <!--title-->
+        <div class="general-title-card-title">
+            <span>糖尿病</span><br/>并发症筛查
+        </div>
+        <!--description-->
+        <div class="general-title-card-descri">
+            <p>
+                GWIV-3项目
+            </p>
+        </div>
+    </div>
+
+    <!--全市糖尿病并发症筛查工作概况-->
+    <div class="work-general-container">
+        <div class="work-general-title">
+            <span><img alt="logo" src="img/home/icon1.png"/>&nbsp;&nbsp;全市糖尿病并发症筛查工作概况</span>
+        </div>
+
+        <!--试管容器（包含4个试管）-->
+        <div class="tube-container">
+            <!--周围神经试管-->
+            <div class="nerve-tube clearfix">
+                <div class="clearfix">
+                    <!--试管标题-->
+                    <div class="tube-title">
+                        <i class="fa fa-caret-right"></i>
+                        <div>
+                            周围神经病变
+                        </div>
+                    </div>
+
+                    <!--试管-->
+                    <div class="tube">
+                        <div class="tube-overflow">
+                            <!--填充色-->
+                            <div class="overflow-filling"></div>
+                            <!--背景色-->
+                            <div class="overflow-back"></div>
+                        </div>
+                        <div class="tube-body">
+                            <!--填充色-->
+                            <div class="tube-filling"></div>
+                            <!--背景色-->
+                            <div class="tube-back"></div>
+                            <!--显示百分比-->
+                            <div class="tube-percent">
+                                <div>100%</div>
+                                <div class="rule-dot">75%</div>
+                                <div>50%</div>
+                                <div>25%</div>
+                                <div>0%</div>
+                            </div>
+                    </div> <!--试管 END-->
+                </div>
+                </div>
+
+                <!--试管描述-->
+                <div class="tube-descri">
+                    <div class="target">
+                        目标:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-number">
+                        完成:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-percentage">
+                        完成率:&nbsp;<span>-- %</span>
+                    </div>
+                </div>
+            </div><!--周围神经试管 END-->
+
+
+            <!--血管病变-试管-->
+            <div class="artery-tube clearfix">
+                <div class="clearfix">
+                    <!--试管标题-->
+                    <div class="tube-title">
+                        <i class="fa fa-caret-right"></i>
+                        <div>
+                            血管病变
+                        </div>
+                    </div>
+
+                    <!--试管-->
+                    <div class="tube">
+                        <div class="tube-overflow">
+                            <!--填充色-->
+                            <div class="overflow-filling"></div>
+                            <!--背景色-->
+                            <div class="overflow-back"></div>
+                        </div>
+                        <div class="tube-body">
+                            <!--填充色-->
+                            <div class="tube-filling"></div>
+                            <!--背景色-->
+                            <div class="tube-back"></div>
+                            <!--显示百分比-->
+                            <div class="tube-percent">
+                                <div>100%</div>
+                                <div class="rule-dot">75%</div>
+                                <div>50%</div>
+                                <div>25%</div>
+                                <div>0%</div>
+                            </div>
+                        </div> <!--试管 END-->
+                    </div>
+                </div>
+
+                <!--试管描述-->
+                <div class="tube-descri">
+                    <div class="target">
+                        目标:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-number">
+                        完成:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-percentage">
+                        完成率:&nbsp;<span>-- %</span>
+                    </div>
+                </div>
+            </div><!--血管病变-试管 END-->
+
+
+            <!--视网膜病变-试管-->
+            <div class="retina-tube clearfix">
+                <div class="clearfix">
+                    <!--试管标题-->
+                    <div class="tube-title">
+                        <i class="fa fa-caret-right"></i>
+                        <div>
+                            视网膜病变
+                        </div>
+                    </div>
+
+                    <!--试管-->
+                    <div class="tube">
+                        <div class="tube-overflow">
+                            <!--填充色-->
+                            <div class="overflow-filling"></div>
+                            <!--背景色-->
+                            <div class="overflow-back"></div>
+                        </div>
+                        <div class="tube-body">
+                            <!--填充色-->
+                            <div class="tube-filling"></div>
+                            <!--背景色-->
+                            <div class="tube-back"></div>
+                            <!--显示百分比-->
+                            <div class="tube-percent">
+                                <div>100%</div>
+                                <div class="rule-dot">75%</div>
+                                <div>50%</div>
+                                <div>25%</div>
+                                <div>0%</div>
+                            </div>
+                        </div> <!--试管 END-->
+                    </div>
+                </div>
+
+                <!--试管描述-->
+                <div class="tube-descri">
+                    <div class="target">
+                        目标:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-number">
+                        完成:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-percentage">
+                        完成率:&nbsp;<span>-- %</span>
+                    </div>
+                </div>
+            </div><!--视网膜病变-试管 END-->
+
+
+            <!--肾脏病变-试管-->
+            <div class="kidney-tube clearfix">
+                <div class="clearfix">
+                    <!--试管标题-->
+                    <div class="tube-title">
+                        <i class="fa fa-caret-right"></i>
+                        <div>
+                            肾脏病变
+                        </div>
+                    </div>
+
+                    <!--试管-->
+                    <div class="tube">
+                        <div class="tube-overflow">
+                            <!--填充色-->
+                            <div class="overflow-filling"></div>
+                            <!--背景色-->
+                            <div class="overflow-back"></div>
+                        </div>
+                        <div class="tube-body">
+                            <!--填充色-->
+                            <div class="tube-filling"></div>
+                            <!--背景色-->
+                            <div class="tube-back"></div>
+                            <!--显示百分比-->
+                            <div class="tube-percent">
+                                <div>100%</div>
+                                <div class="rule-dot">75%</div>
+                                <div>50%</div>
+                                <div>25%</div>
+                                <div>0%</div>
+                            </div>
+                        </div> <!--试管 END-->
+                    </div>
+                </div>
+
+                <!--试管描述-->
+                <div class="tube-descri">
+                    <div class="target">
+                        目标:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-number">
+                        完成:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-percentage">
+                        完成率:&nbsp;<span>-- %</span>
+                    </div>
+                </div>
+            </div><!--肾脏病变-试管 END-->
+
+            <!--血糖-试管-->
+            <div class=" blood-sugar-tube clearfix">
+                <div class="clearfix">
+                    <!--试管标题-->
+                    <div class="tube-title">
+                        <i class="fa fa-caret-right"></i>
+                        <div>
+                            血糖
+                        </div>
+                    </div>
+
+                    <!--试管-->
+                    <div class="tube">
+                        <div class="tube-overflow">
+                            <!--填充色-->
+                            <div class="overflow-filling"></div>
+                            <!--背景色-->
+                            <div class="overflow-back"></div>
+                        </div>
+                        <div class="tube-body">
+                            <!--填充色-->
+                            <div class="tube-filling"></div>
+                            <!--背景色-->
+                            <div class="tube-back"></div>
+                            <!--显示百分比-->
+                            <div class="tube-percent">
+                                <div>100%</div>
+                                <div class="rule-dot">75%</div>
+                                <div>50%</div>
+                                <div>25%</div>
+                                <div>0%</div>
+                            </div>
+                        </div> <!--试管 END-->
+                    </div>
+                </div>
+
+                <!--试管描述-->
+                <div class="tube-descri">
+                    <div class="target">
+                        目标:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-number">
+                        完成:&nbsp;<span>-- 万人</span>
+                    </div>
+                    <div class="complete-percentage">
+                        完成率:&nbsp;<span>-- %</span>
+                    </div>
+                </div>
+            </div><!--血糖-试管 END-->
+
+        </div><!--试管容器（包含4个试管） END-->
+    </div><!--全市糖尿病并发症筛查工作概况 END-->
+</div>
+<script type="text/javascript">
+    // 初始化工作概况试管模块
+    /**
+     *
+     * @param parentEleSlect 父元素选择器
+     * @param percent 完成率 百分比
+     * 注意： 只接收整数百分比，不接受带小数点百分比
+     */
+    function initTube(parentEleSlect, percent) {
+        // 试管初始化百分比 为 0%
+        $(parentEleSlect+' .tube-back').css('height', '100%');
+        $(parentEleSlect+' .overflow-back').css('height', '100%');
+
+        setTimeout(1000, function() {});
+        // 背景色减少20%，则完成率为20%
+        var heightPercent = 100 -  percent.substring(0, percent.indexOf('%')) + '%';
+        $(parentEleSlect+' .tube-back').animate({
+            height: heightPercent,
+        }, 1500, function() {
+            var perNum =  parseInt(percent.substring(0, percent.indexOf('%')));
+            // 完成率为100%是展示溢出效果
+            if(perNum > 100) {
+                $(parentEleSlect+' .overflow-back').animate({
+                    height: '0%',
+                }, 250);
+            }
+        });
+    }
+
+
+    var screenObj = (function() {
+    	var finishNum = false;
+    	var targetNum = false;
+
+    	return {
+		    // 获取周围神经病变、视网膜病变完成人数
+    		getFinishNumber: function(url) {
+    			$.ajax({
+		    		// url: 'api/home/workgeneral',
+		    		url: url,
+		    		type: 'GET',
+		    		dataType: 'json',
+		    		async: false,
+		    		success: function(msg) {		    	
+		    			if(msg.result) {	// 查询成功，result 返回数据
+		    				finishNum = msg.result;
+		    				return ;
+		    			}else {
+		    				return ;
+		    			}
+		    		}
+		    	});
+		    	
+    			return finishNum;
+
+    		},
+		 	// 获取周围神经病变、视网膜病变目标人数,目标人数先不相加
+    		getTargetNumber: function() {
+    			$.ajax({
+		    		url: 'api/dataentry/complications',
+		    		type: 'GET',
+		    		dataType: 'json',
+		    		async: false,
+		    		success: function(msg) {
+		    			if(msg.result) {	// 查询成功，result 返回数据
+		    				targetNum = msg.result;
+		    				return;
+		    			}else {
+		    				return;
+		    			}
+		    		}
+		    	});	
+		    	return targetNum;
+    		},
+    		init: function() {
+				finishNum = false;
+	    		targetNum = false;
+    		},
+    	}
+    } ());
+
+    // 展示具体数据, selector 为具体选择器, targetNum 为全上海的目标人数， finishNum 为具体完成人数
+    function disTubeData(selector, targetNum, finishNum, scale) {
+		$(selector+ ' .target').find('span').text((targetNum/10000).toFixed(2) + ' 万人');
+    	if(finishNum.length >= 4) { 
+			$(selector+' .complete-number').find('span').text((finishNum/10000).toFixed(2)+ '万人');
+    	}else {
+			$(selector+' .complete-number').find('span').text(finishNum + ' 人');
+    	}
+
+    	// 展示完成率
+    	$(selector+' .complete-percentage').find('span').text(scale);
+    }
+
+    // 展示筛查工作概况完成情况
+    function disScreenWorkGeneral() {
+    	var finishNum = screenObj.getFinishNumber('api/home/workgeneral');
+    	// 未查询出数据，结束程序
+    	if(!finishNum) return;
+        finishNum = finishNum[0];
+    	var targetNum = 0,
+    	temp = screenObj.getTargetNumber();
+    	
+    	// 未查询出数据，结束程序
+    	if(!temp) {
+			return;
+    	}else {
+    		// 将所有区的目标人数相加获得全上海的目标人数
+    		for(var i=0; i< temp.length; i++) {
+    			targetNum += temp[i].task;
+    		}
+    	}
+
+    	// 周围神经病变
+    	var sjbbScale = ((finishNum.sjbb_cnt/targetNum)* 100).toFixed(2) + '%'; // 神经病变完成率
+		disTubeData('.nerve-tube', targetNum, finishNum.sjbb_cnt, sjbbScale);
+
+	  	// 展示视网膜病变
+    	var swmScale = ((finishNum.swm_cnt/targetNum)* 100).toFixed(2) + '%'; // 视网膜病变完成率
+		disTubeData('.retina-tube', targetNum, finishNum.swm_cnt, swmScale);
+
+		 // 初始化神经试管
+        initTube('.nerve-tube', sjbbScale);
+        //  初始化视网膜试管
+        initTube('.retina-tube', swmScale);
+    }
+
+    // 页面初始化函数
+    $(function(){
+    	// 获取数据并展示
+		disScreenWorkGeneral();
+    });
+</script>

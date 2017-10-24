@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>糖尿病并发症筛查各区工作目标录入</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/style-responsive.css" rel="stylesheet">
+    <link href="../../css/toastr.css" rel="stylesheet">
+    <link href="../../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <style>
+        .header {
+            width: 100%;
+            height: 50px;
+            background-color: #3D5B77;
+            margin: 0 auto;
+            position: relative !important;
+            padding: 0 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #3D5B77;
+            margin: 0 auto;
+        }
+
+        .back-wrapper {
+            margin: 0 auto;
+        }
+
+        .nav span {
+            margin-center: 5px;
+        }
+
+        .main-nav a {
+            color: #000;
+        }
+
+        .main-nav .nav-list {
+            text-align: left;
+            padding-left: 60px;
+        }
+
+        .back-wrapper {
+            width: 90%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            position: relative;
+            height: 650px;
+        }
+
+        .back-wrapper-title {
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .back-wrapper-title p {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            margin: 0;
+        }
+
+        .back-wrapper-main label {
+            margin: 20px 40px 0 40px;
+        }
+
+        .back-wrapper-footer button {
+            margin: 15px auto 0;
+            display: block;
+            width: 120px;
+        }
+
+        .last-time-footer {
+            float: right;
+            margin-top: 60px;
+        }
+
+        body {
+            background: #fff;
+        }
+
+        .logout{
+            float: right;
+            height: 60px;
+            width: 50px;
+            cursor: pointer
+        }
+        .logout a{
+            font-size: 1em;
+            line-height: 60px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div style="color: white;">
+        <div style="padding: 10px 0 0 10px;float: left" class="clearfix">
+            <span style="font-size: 2em;">糖尿病并发症筛查各区工作目标录入</span>
+        </div>
+        <div class="clearfix logout">
+            <a href="../../logout" >注销</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-nav clearfix">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-3 clearfix">
+                <ul class="nav">
+                    <li>
+                        <a class="nav-header">
+                            <span class="fa fa-caret-down"></span> 糖尿病并发症筛查目标
+                        </a>
+                        <ul class="nav nav-list">
+                            <li class="active">糖尿病并发症筛查各区工作目标录入</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 clearfix">
+                <div class="back-wrapper clearfix">
+                    <div class="back-wrapper-title">
+                        <p>糖尿病并发症筛查各区工作目标</p>
+                    </div>
+                    <div class="back-wrapper-main row">
+                        <div class="col-md-6" style="text-align: center">
+                            <label>全市</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label id="totalNumber"></label>
+                        </div>
+                    </div>
+                    <div id="content-complications"></div>
+                    <div class="back-wrapper-footer">
+                        <button type="button" class="btn btn-default" onclick="saveHomeData();">提交</button>
+                        <span style="margin-left: 630px;">最后更改时间： <span id="update"></span></span>
+                    </div>
+                    <div class="last-time-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+</div>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/toastr.js"></script>
+<script src="../../js/jquery.alerts.js" type="text/javascript"></script>
+<script>
+    //页面初始化
+    $(function() {
+        getComplicationsData();
+    });
+
+    //获取并发症目标人数
+    function getComplicationsData () {
+        $.getJSON('../../api/dataentry/complications',function(rm) {
+            if(rm.code == 1) {
+                var data = rm.result;
+                var html='';
+                var taskNum = 0;
+                if(data.length > 0) {
+                    for(var i = 0; i < data.length; i++) {
+                        taskNum += data[i].task;
+                        html += '<div class="back-wrapper-main row" style=" margin-top: 5px">'
+                                +    '<div class="col-md-6" style="text-align: center">'
+                                +    '      <span > ' + data[i].county + '</span>'
+                                +    '      <span hidden> ' + data[i].id + '</span>'
+                                +    '</div>'
+                                +    '<div class="col-md-6">'
+                                +    '      <input type="text" class="control-label"  value="' + data[i].task + '" >'
+                                +    '</div> '
+                                + '</div>';
+                    }
+                    $('#totalNumber').text(taskNum);
+                    //时间格式化
+                    var date  = new Date(new Date(data[0].timestamp).getTime());
+                    var  Y = date.getFullYear() + '-';
+                    var  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    var  D = (date.getDate() <10 ? '0' +(date.getDate()):date.getDate()) +  ' ';
+                    var  h = (date.getHours()<10 ? '0' + (date.getHours()) :date.getHours())+ ':';
+                    var  m = (date.getMinutes()<10 ? '0' +(date.getMinutes()) : date.getMinutes()) + ':';
+                    var  s = (date.getSeconds()<10 ? '0' +(date.getSeconds()) : date.getSeconds());
+                    $('#update').text( Y+M+D+h+m+s);
+
+                    $('#content-complications').empty();
+                    $('#content-complications').html(html);
+                }else {
+                    toastr.error("糖尿病并发症工作目标查询失败" + data.msg);
+                }
+            }
+        });
+
+    }
+
+    //糖尿病并发症筛查各区工作目标录入
+    function saveHomeData() {
+        var params = [];
+        var htmls = $('#content-complications').find('.back-wrapper-main');
+        if (htmls.length > 0) {
+            for (var i = 0; i < htmls.length; i++) {
+                var html = htmls.eq(i);
+                var county = html.find('span').eq(0).text().trim().toString();
+                var id = html.find('span').eq(1).text();
+                var complications_task = html.find('input').eq(0).val();
+                params.push({
+                    id: Number(id.trim()),
+                    county: county,
+                    task: Number(complications_task),
+                });
+            }
+        }
+        $.ajax({
+            url: '../../api/dataentry/complications',
+            type: 'POST',
+            data: {
+                params: params
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    toastr.success("糖尿病并发症筛查各区工作目标录入成功！" + data.msg);
+                    getComplicationsData();
+                } else {
+                    toastr.error("糖尿病并发症筛查各区工作目标录入失败: " + data.msg);
+                }
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

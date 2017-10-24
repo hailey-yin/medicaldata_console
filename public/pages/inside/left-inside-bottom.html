@@ -1,0 +1,348 @@
+<style>
+    .modal-title p {
+        font-size: 27px;
+        color: #718aa6;
+        text-align: center;
+        font-family: 'Microsoft YaHei';
+    }
+
+    .modal-title {
+        padding: 24px 0 0 0;
+    }
+
+    .left-inside-bottom p {
+        padding: 5px 26px;
+    }
+    .analysis-rules {
+        height: 50px;
+        padding: 10px 0 0 200px;
+    }
+
+    .analysis-rules .btn {
+        width: 90px;
+        height: 34px;
+        border-radius: 0;
+        font-size: 16px;
+        background-color: #d0e5f7;
+        color: #ffffff;
+        padding-bottom: 5px;
+    }
+
+    .analysis-rules .btn:first-child {
+        width: 100px;
+    }
+
+    .analysis-rules >.btn-active {
+        background-color: #43b6f5;
+        color: #ffffff;
+    }
+
+    .finish-chart-row {
+        display:inline;
+    }
+    #schedule-analysis-module {
+        width: 820px;
+        height: 280px;
+        float: left;
+    }
+</style>
+<div class="all-top">
+    <div class="modal-title">
+        <p>
+            <span class="model-title-icon"><img src="img/inside/icon3.png" alt="icon"></span><span id="left-title"> 全市糖尿病并发症筛查工作进度分析</span>
+        </p>
+    </div>
+    <div class="analysis-rules">
+        <button class="btn btn-sm btn-active" value="0">周围神经</button>
+        <button class="btn btn-sm" value="1">血管</button>
+        <button class="btn btn-sm" value="2">视网膜</button>
+        <button class="btn btn-sm" value="3">肾脏</button>
+        <button class="btn btn-sm" value="4">血糖</button>
+    </div>
+    <div class="finish-chart-row">
+        <div id="schedule-analysis-module" ></div>
+   </div>
+</div>
+<script>
+
+    var tabValue = 0;
+    $(function () {
+        getgoalsNumber(tabValue);
+        //病变tab点击事件
+        $('.analysis-rules .btn-sm').click(function(){
+            if(!$(this).hasClass("btn-active")) {
+                $(this).addClass("btn-active");
+                $(this).siblings().removeClass("btn-active");
+                tabValue = Number($(this).val());
+                getgoalsNumber(tabValue);
+            }
+        });
+    });
+
+    //获取目标人数
+
+    function getgoalsNumber(type) {
+        var county = $('#left-title').text().substr(0,$('#left-title').text().length-14).trim();
+        if(county == "崇明区") {
+            county = "崇明县";
+        }
+
+        var xdataconfig = [];
+        var ydataconfig = [];
+        $.getJSON('api/dataentry/complications',function(rm) {
+            if(rm.code == 1) {
+                var data = rm.result;
+                var taskSum = {
+                    sjbb_taskSum:0,//神经周围
+                    swm_taskSum:0,//视网膜
+                };
+                if (data.length > 0) {
+                    if(county == '全市') {
+                        for (var i = 0; i < data.length; i++) {
+                            taskSum.sjbb_taskSum += data[i].task;
+                            taskSum.swm_taskSum += data[i].task;
+                        }
+                    }else {
+                        for (var i = 0; i < data.length; i++) {
+                            if(data[i].county == county) {
+                                taskSum.sjbb_taskSum = data[i].task;
+                                taskSum.swm_taskSum = data[i].task;
+                            }else{
+
+                            }
+                        }
+                    }
+                    $.getJSON('api/inside/analysis', function (msg) {
+                        if (msg.code === 1) {
+                            if(county == '全市') {
+                                var data = msg.result.allAnalysis;
+                            }else {
+                                var data = msg.result.areaAnalysis;
+                            }
+                            if(data && data.length > 0) {
+                                switch (type) {
+                                    case 0:
+                                        var sjbb_taskSum = taskSum.sjbb_taskSum;
+                                        if(county == '全市') {
+                                            var name = '全市糖尿病并发症周围神经筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                xdataconfig.push(dateFormat(data[i].dta));
+                                                var scalar = sjbb_taskSum >0 ? ((data[i].sjbb_cnt/sjbb_taskSum)*100).toFixed(2):0;
+                                                ydataconfig.push(scalar);
+                                            }
+                                        }else {
+                                            var name = county + '糖尿病并发症周围神经筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                if(data[i].county == county) {
+                                                    xdataconfig.push(dateFormat(data[i].dta));
+                                                    var scalar = sjbb_taskSum >0 ? ((data[i].sjbb_cnt/sjbb_taskSum)*100).toFixed(2):0;
+                                                    ydataconfig.push(scalar);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 1:
+                                       // var risk_taskSum = taskSum.risk_taskSum;
+                                        if(county == '全市') {
+                                            var name = '全市糖尿病并发症血管筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                xdataconfig.push(dateFormat(data[i].dta));
+                                                //var scalar = risk_taskSum >0 ? ((data[i].assessment/risk_taskSum)*100).toFixed(2):0;
+                                                ydataconfig.push(0);
+                                            }
+                                        }else {
+                                            var name = county + '糖尿病并发症血管筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                if(data[i].county == county) {
+                                                    xdataconfig.push(dateFormat(data[i].dta));
+                                                  //  var scalar = risk_taskSum >0 ? ((data[i].assessment/risk_taskSum)*100).toFixed(2):0;
+                                                    ydataconfig.push(0);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        var swm_taskSum = taskSum.swm_taskSum;
+
+                                        if(county == '全市') {
+                                            var name = '全市糖尿病并发症视网膜筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                xdataconfig.push(dateFormat(data[i].dta));
+                                                var scalar = swm_taskSum >0 ? ((data[i].swm_cnt/swm_taskSum)*100).toFixed(2):0;
+                                                ydataconfig.push(scalar);
+                                            }
+                                        }else {
+                                            var name = county + '糖尿病并发症视网膜筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                if(data[i].county == county) {
+                                                    xdataconfig.push(dateFormat(data[i].dta));
+                                                    var scalar = swm_taskSum >0 ? ((data[i].swm_cnt/swm_taskSum)*100).toFixed(2):0;
+                                                    ydataconfig.push(scalar);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                       // var mobilization_taskSum = taskSum.mobilization_taskSum;
+
+                                        if(county == '全市') {
+                                            var name = '全市糖尿病并发症肾脏筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                xdataconfig.push(dateFormat(data[i].dta));
+                                                //var scalar = mobilization_taskSum >0 ? ((data[i].mobilization/mobilization_taskSum)*100).toFixed(2):0;
+                                                ydataconfig.push(0);
+                                            }
+                                        }else {
+                                            var name = county + '糖尿病并发症肾脏筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                if(data[i].county == county) {
+                                                    xdataconfig.push(dateFormat(data[i].dta));
+                                                   // var scalar = mobilization_taskSum >0 ? ((data[i].mobilization/mobilization_taskSum)*100).toFixed(2):0;
+                                                    ydataconfig.push(0);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 4:
+                                      //  var mobilization_taskSum = taskSum.mobilization_taskSum;
+
+                                        if(county == '全市') {
+                                            var name = '全市糖尿病并发症血糖筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                xdataconfig.push(dateFormat(data[i].dta));
+                                               // var scalar = mobilization_taskSum >0 ? ((data[i].mobilization/mobilization_taskSum)*100).toFixed(2):0;
+                                                ydataconfig.push(0);
+                                            }
+                                        }else {
+                                            var name = county + '糖尿病并发症血糖筛查进度分析';
+                                            for (var i = 0; i < data.length; i++) {
+                                                if(data[i].county == county) {
+                                                    xdataconfig.push(dateFormat(data[i].dta));
+                                                   // var scalar = mobilization_taskSum >0 ? ((data[i].mobilization/mobilization_taskSum)*100).toFixed(2):0;
+                                                    ydataconfig.push(0);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                            initLeftBottomChart(name,xdataconfig,ydataconfig);
+                        }
+                    });
+                }
+            }
+        });
+    }
+   function initLeftBottomChart(name,xdata,ydata) {
+       var scheduleAnalysis = echarts.init(document.getElementById('schedule-analysis-module'));
+       var option = {
+           color: ['#5ec3ce'],
+           tooltip : {
+               trigger: 'axis',
+               axisPointer : {
+                   animation: false
+               }
+           },
+           grid: {
+               left: '3%',
+               right: '4%',
+               bottom: '3%',
+               containLabel: true
+           },
+           xAxis : [
+               {
+                   type : 'category',
+                   data : xdata,
+                   axisTick: false,             //刻度
+                   axisLine: {show: false,},    //刻度线
+                   splitLine: {show: false},    //分割线
+                   axisLabel: {                 //刻度标签
+                       interval:0,
+                       textStyle: {
+                           color: '#b3b5ba',
+                           fontSize:12,
+                           'font-family':'Arial',
+                       }
+                   }
+               }
+           ],
+           yAxis : [
+               {
+                   axisTick: false,
+                   type : 'value',
+                   axisLine: {
+                       show: false
+                   },
+                   axisLabel: {
+                       interval:0,
+                       formatter: '{value} %',
+                       textStyle: {
+                           color: '#b3b5ba',
+                           fontSize: 12
+                       }
+                   },
+                   splitNumber:5,
+                   splitLine: {
+                       show: true,
+                       lineStyle: {
+                           color: '#b3b5ba',
+                           width: 0.5
+                       }
+                   },
+                   min:0,
+                   max:140,
+               }
+           ],
+           series : [
+               {
+                   name: name,
+                   type:'bar',
+                   barWidth: '26px',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'top',
+                           formatter: '{c} %'
+                       },
+                   },
+                   data:ydata,
+                   markLine: {
+                       data: [
+                           {
+                               yAxis: 100,
+                               label:{
+                                   normal:{
+                                       formatter:function () {
+                                           return 100 + '%'
+
+                                       }
+                                   }
+                               }
+                           },
+                       ],
+                       lineStyle:{
+                           normal:{
+                               color: '#E99D59',
+                               width:3
+                           }
+                       },
+                   }
+               }
+           ]
+       };
+       scheduleAnalysis.setOption(option);
+   }
+
+    //‘YYYYMM’型日期转换成‘YYYY年MM月’格式
+    function dateFormat(dta) {
+        var year = dta.substr(0,4);
+        if(dta.substr(4,1) == '0') {
+            var month = dta.substr(5,1);
+        }else {
+            var month = dta.substr(4,2);
+        }
+        return year + '年' + month + '月';
+    }
+
+
+</script>

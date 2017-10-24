@@ -1,0 +1,508 @@
+<style>
+.modal-title p {
+    font-size: 27px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.modal-title {
+    padding: 24px 0 0 0;
+}
+.inside-work-general-container .tube-container {
+    width: 970px;
+    height: 414px;
+    display: inline-block;
+    position: absolute;
+    padding-top: 30px;
+}
+.inside-work-general-container .nerve-tube{
+    position: absolute;
+    left: 45px;
+    width: 120px;
+    height: 380px;
+}
+.inside-work-general-container .artery-tube{
+    position: absolute;
+    left: 235px;
+    width: 120px;
+}
+.inside-work-general-container .retina-tube {
+    position: absolute;
+    left: 425px;
+    width: 120px;
+}
+.inside-work-general-container .kidney-tube{
+    position: absolute;
+    left: 615px;
+    width:120px;
+}
+.inside-work-general-container .blood-sugar-tube{
+    position: absolute;
+    left: 805px;
+    width:120px;
+}
+.inside-work-general-container .tube-title {
+    margin-top: 60px;
+    width: 20px;
+    text-align: center;
+    float:left;
+}
+.inside-work-general-container .tube-title i{
+    height: 12px;
+    width: 12px;
+    color: #455669;
+}
+.inside-work-general-container .tube-title div{
+    font-size: 18px;
+    color: #455669;
+    width: 20px;
+    line-height: 1.2em;
+    font-weight: 600;
+}
+.inside-work-general-container .tube{
+    margin-left: 20px;
+    margin-right:20px;
+    width: 60px;
+    height: 240px;
+    float: right;
+}
+.inside-work-general-container .tube-overflow{
+    height: 20px;
+    width:45px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+.inside-work-general-container .overflow-back{
+    width:45px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10000;
+    height: 20px;
+    background-color: #ffffff;
+}
+.inside-work-general-container .overflow-filling{
+    width:45px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 100;
+    height: 20px;
+    background-color: #e99d59;
+}
+.inside-work-general-container .tube-body{
+    width:58px;
+    height: 220px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+.inside-work-general-container .tube-filling{
+    position: absolute;
+    z-index: 100;
+    width:58px;
+    height: 220px;
+    background: url("img/inside/tube.png") no-repeat;
+}
+.inside-work-general-container .tube-back {
+    position: absolute;
+    height: 220px;
+    width: 58px;
+    z-index: 1000;
+    background: url("img/inside/tube2.png") no-repeat;
+}
+.inside-work-general-container .tube-percent{
+    position: absolute;
+    z-index: 10000;
+    height: 220px;
+    width: 58px;
+    font-size: 14px;
+    line-height: 1em;
+    color: #2f405b;
+}
+.inside-work-general-container .tube-percent div{
+    text-align: center;
+    margin-top: 41px;
+}
+.inside-work-general-container .tube-percent div:first-child{
+    margin-top:1px
+}
+.inside-work-general-container .tube-percent div:last-child{
+    margin-top:32px
+}
+.inside-work-general-container .rule-dot {
+    margin-top: 33px !important;
+}
+
+.inside-work-general-container .tube-descri{
+    width: 200px;
+    margin: 20px auto 0 auto;
+    height: 50px;
+    text-align: center;
+    position: absolute;
+    margin-left: -40px;
+}
+.inside-work-general-container .tube-descri .target{
+    font-size: 16px;
+    line-height: 1em;
+    color: #455669;
+    margin-top:8px;
+}
+.inside-work-general-container .tube-descri .complete-number {
+    font-size: 16px;
+    line-height: 1em;
+    color: #455669;
+    margin-top:8px;
+}
+.inside-work-general-container .tube-descri .complete-percentage{
+    margin-top:8px;
+    color: #01cbfe;
+    font-size: 18px;
+    line-height: 1em;
+}
+</style>
+<div class="inside-work-general-container">
+    <div class="modal-title">
+        <p>
+            <span class="model-title-icon"><img src="img/inside/icon.png" alt="icon"></span> <span id="right-top-title"> 全市糖尿病并发症筛查工作概况</span>
+        </p>
+    </div>
+
+    <!--试管容器（包含4个试管）-->
+    <div class="tube-container">
+        <!--周围神经试管-->
+        <div class="nerve-tube clearfix">
+            <div class="clearfix">
+                <!--试管标题-->
+                <div class="tube-title">
+                    <i class="fa fa-caret-right"></i>
+                    <div>
+                        周围神经病变
+                    </div>
+                </div>
+
+                <!--试管-->
+                <div class="tube">
+                    <div class="tube-overflow">
+                        <!--填充色-->
+                        <div class="overflow-filling"></div>
+                        <!--背景色-->
+                        <div class="overflow-back"></div>
+                    </div>
+                    <div class="tube-body">
+                        <!--填充色-->
+                        <div class="tube-filling"></div>
+                        <!--背景色-->
+                        <div class="tube-back"></div>
+                        <!--显示百分比-->
+                        <div class="tube-percent">
+                            <div>100%</div>
+                            <div class="rule-dot">75%</div>
+                            <div>50%</div>
+                            <div>25%</div>
+                            <div>0%</div>
+                        </div>
+                    </div> <!--试管 END-->
+                </div>
+            </div>
+
+            <!--试管描述-->
+            <div class="tube-descri">
+                <div class="target">
+                    目标:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-number">
+                    完成:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-percentage">
+                    完成率:&nbsp;<span>-- %</span>
+                </div>
+            </div>
+        </div><!--周围神经试管 END-->
+
+
+        <!--血管病变-试管-->
+        <div class="artery-tube clearfix">
+            <div class="clearfix">
+                <!--试管标题-->
+                <div class="tube-title">
+                    <i class="fa fa-caret-right"></i>
+                    <div>
+                        血管病变
+                    </div>
+                </div>
+
+                <!--试管-->
+                <div class="tube">
+                    <div class="tube-overflow">
+                        <!--填充色-->
+                        <div class="overflow-filling"></div>
+                        <!--背景色-->
+                        <div class="overflow-back"></div>
+                    </div>
+                    <div class="tube-body">
+                        <!--填充色-->
+                        <div class="tube-filling"></div>
+                        <!--背景色-->
+                        <div class="tube-back"></div>
+                        <!--显示百分比-->
+                        <div class="tube-percent">
+                            <div>100%</div>
+                            <div class="rule-dot">75%</div>
+                            <div>50%</div>
+                            <div>25%</div>
+                            <div>0%</div>
+                        </div>
+                    </div> <!--试管 END-->
+                </div>
+            </div>
+
+            <!--试管描述-->
+            <div class="tube-descri">
+                <div class="target">
+                    目标:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-number">
+                    完成:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-percentage">
+                    完成率:&nbsp;<span>-- %</span>
+                </div>
+            </div>
+        </div><!--血管病变-试管 END-->
+
+
+        <!--视网膜病变-试管-->
+        <div class="retina-tube clearfix">
+            <div class="clearfix">
+                <!--试管标题-->
+                <div class="tube-title">
+                    <i class="fa fa-caret-right"></i>
+                    <div>
+                        视网膜病变
+                    </div>
+                </div>
+
+                <!--试管-->
+                <div class="tube">
+                    <div class="tube-overflow">
+                        <!--填充色-->
+                        <div class="overflow-filling"></div>
+                        <!--背景色-->
+                        <div class="overflow-back"></div>
+                    </div>
+                    <div class="tube-body">
+                        <!--填充色-->
+                        <div class="tube-filling"></div>
+                        <!--背景色-->
+                        <div class="tube-back"></div>
+                        <!--显示百分比-->
+                        <div class="tube-percent">
+                            <div>100%</div>
+                            <div class="rule-dot">75%</div>
+                            <div>50%</div>
+                            <div>25%</div>
+                            <div>0%</div>
+                        </div>
+                    </div> <!--试管 END-->
+                </div>
+            </div>
+
+            <!--试管描述-->
+            <div class="tube-descri">
+                <div class="target">
+                    目标:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-number">
+                    完成:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-percentage">
+                    完成率:&nbsp;<span>-- %</span>
+                </div>
+            </div>
+        </div><!--视网膜病变-试管 END-->
+
+
+        <!--肾脏病变-试管-->
+        <div class="kidney-tube clearfix">
+            <div class="clearfix">
+                <!--试管标题-->
+                <div class="tube-title">
+                    <i class="fa fa-caret-right"></i>
+                    <div>
+                        肾脏病变
+                    </div>
+                </div>
+
+                <!--试管-->
+                <div class="tube">
+                    <div class="tube-overflow">
+                        <!--填充色-->
+                        <div class="overflow-filling"></div>
+                        <!--背景色-->
+                        <div class="overflow-back"></div>
+                    </div>
+                    <div class="tube-body">
+                        <!--填充色-->
+                        <div class="tube-filling"></div>
+                        <!--背景色-->
+                        <div class="tube-back"></div>
+                        <!--显示百分比-->
+                        <div class="tube-percent">
+                            <div>100%</div>
+                            <div class="rule-dot">75%</div>
+                            <div>50%</div>
+                            <div>25%</div>
+                            <div>0%</div>
+                        </div>
+                    </div> <!--试管 END-->
+                </div>
+            </div>
+
+            <!--试管描述-->
+            <div class="tube-descri">
+                <div class="target">
+                    目标:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-number">
+                    完成:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-percentage">
+                    完成率:&nbsp;<span>-- %</span>
+                </div>
+            </div>
+        </div><!--肾脏病变-试管 END-->
+
+        <!--血糖-试管-->
+        <div class=" blood-sugar-tube clearfix">
+            <div class="clearfix">
+                <!--试管标题-->
+                <div class="tube-title">
+                    <i class="fa fa-caret-right"></i>
+                    <div>
+                        血糖
+                    </div>
+                </div>
+
+                <!--试管-->
+                <div class="tube">
+                    <div class="tube-overflow">
+                        <!--填充色-->
+                        <div class="overflow-filling"></div>
+                        <!--背景色-->
+                        <div class="overflow-back"></div>
+                    </div>
+                    <div class="tube-body">
+                        <!--填充色-->
+                        <div class="tube-filling"></div>
+                        <!--背景色-->
+                        <div class="tube-back"></div>
+                        <!--显示百分比-->
+                        <div class="tube-percent">
+                            <div>100%</div>
+                            <div class="rule-dot">75%</div>
+                            <div>50%</div>
+                            <div>25%</div>
+                            <div>0%</div>
+                        </div>
+                    </div> <!--试管 END-->
+                </div>
+            </div>
+
+            <!--试管描述-->
+            <div class="tube-descri">
+                <div class="target">
+                    目标:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-number">
+                    完成:&nbsp;<span>-- 万人</span>
+                </div>
+                <div class="complete-percentage">
+                    完成率:&nbsp;<span>-- %</span>
+                </div>
+            </div>
+        </div><!--血糖-试管 END-->
+
+    </div><!--试管容器（包含4个试管） END-->
+</div>
+<script type="text/javascript">
+
+    // 根据选择的区县来展示对应的数据, county 为对应的区县名
+    function disAreaScreenWorkgeneral(county) {
+        // 去除首尾空格
+        var county = county.trim();
+        // 初始化对象值
+        screenObj.init();
+
+        var finishNum = {
+            sfbb_cnt: 0,
+            swm_cnt: 0,
+        },
+        finishTemp = screenObj.getFinishNumber('api/inside/workgeneral');
+        // 未查询出数据，结束
+        if(!finishTemp) {
+            return;
+        }else {
+            if(county == '全上海') {
+                for(var i=0; i<finishTemp.length; i++) {
+                    finishNum.sfbb_cnt += finishTemp[i].sfbb_cnt;
+                    finishNum.swm_cnt += finishTemp[i].swm_cnt;
+                }
+            }else {
+                for(var i=0; i<finishTemp.length; i++) {
+                    if(finishTemp[i].county == county) {
+                        finishNum =   finishTemp[i];
+                    }
+                    if(county == '崇明区' && finishTemp[i].county == '崇明县') {
+                        finishNum =   finishTemp[i];
+                    }
+                }
+            }
+        }
+
+        // 默认全上海市
+        var targetNum = 0,  
+        temp = screenObj.getTargetNumber();
+        // 未查询出数据，结束
+        if(!temp) {
+            return;
+        }else {
+            if(county == '全上海') {
+                // 将所有区的目标人数相加获得全上海的目标人数
+                for(var i=0; i< temp.length; i++) {
+                    targetNum += temp[i].task;
+                }
+            }else{
+                 for(var i=0; i< temp.length; i++) {
+                    if(temp[i].county == county) {
+                          targetNum =   temp[i].task;
+                    }
+                    if(county == '崇明区' && temp[i].county == '崇明县') {
+                        targetNum = temp[i].task;
+                    }
+                }
+            }
+        }
+
+
+        // 周围神经病变
+        var sjbbScale = ((finishNum.sfbb_cnt/targetNum)* 100).toFixed(2) + '%';// 神经病变完成率
+        disTubeData('.nerve-tube', targetNum, finishNum.sfbb_cnt, sjbbScale);
+
+        // 展示视网膜病变
+        var swmScale = ((finishNum.swm_cnt/targetNum)* 100).toFixed(2) + '%'; // 视网膜病变完成率
+        disTubeData('.retina-tube', targetNum, finishNum.swm_cnt, swmScale);
+
+         // 初始化神经试管
+        initTube('.nerve-tube', sjbbScale);
+        //  初始化视网膜试管
+        initTube('.retina-tube', swmScale);
+    }
+
+
+
+    // 页面初始化函数
+    $(function(){
+        // 展示全上海工作概况
+        disAreaScreenWorkgeneral('全上海');
+    });
+</script>

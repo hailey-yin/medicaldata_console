@@ -1,0 +1,1224 @@
+<style xmlns="http://www.w3.org/1999/html">
+    .county-item {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+    .county-item:hover {
+        color: #262626;
+        text-decoration: none;
+        background-color: #f5f5f5;
+    }
+    #select-county {
+        width: 84px;
+        height: 34px;
+        background-color: #43b6f5;
+        border-radius: 0;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 1;
+    }
+    #select-img {
+        width: 34px;
+        height: 34px;
+        background-color: #43b6f5;
+        border-radius: 0;
+        line-height: 1;
+        color: #ffffff;
+        font-size: 16px;
+    }
+    #left {
+        float: left;
+        width: 260px;
+        height: 100%;
+    }
+    #right {
+        float: right;
+        width: 560px;
+        height: 100%;
+    }
+    .visualization {
+        display: none;
+    }
+    #summary-result {
+        width: 100%;
+        height: 100%
+    }
+    .tab-title {
+        text-align: center;
+    }
+    .tab-title ul ,.tab-title ul li{
+        background: transparent;
+        display: inline-block;
+    }
+    .tab-title #myTab>li.active>a {
+        border-bottom: 3px solid #43b6f5;
+    }
+    .tab-title ul li a{
+        background: transparent;
+        font-size: 18px;
+        color:#718aa6;
+        padding-bottom: 3px;
+    }
+    .tab-title ul li:last-child{
+        margin-left: 110px;
+    }
+    .tab-content {
+        width: inherit;
+        height: 480px;
+        background: #f6f9fe;
+        border:1px solid #dedede;
+        margin-top: 10px;
+    }
+    #top {
+        width: 100%;
+        height: 106px;
+    }
+    .diabetes-type-model {
+        width: 226px;
+        height: 106px;
+    }
+    #nerve-modal {
+        float: left;
+        background: #e99d59;
+    }
+    #kidney-modal {
+        float: left;
+        background: #5ec3ce;
+    }
+    #blood-vascular-modal {
+        float: right;
+        background: #808ae9;
+    }
+    .text-type {
+        font-size: 16px;
+        color: #fff;
+    }
+    .text-number {
+        font-family: Arial;
+        font-size: 20px;
+        color: #fff;
+    }
+    .text-title {
+        font-size: 14px;
+        color: #fff
+    }
+    #retina-modal {
+        float: right;
+        background: #43b6f5;
+    }
+    #centre {
+        width: 100%;
+        height: 228px;
+    }
+    #centre-left {
+        float: left;
+        width: 226px;
+    }
+    #graph-area {
+        float: right;
+        margin-left: 34px;
+        height: 141px;
+        width: 226px;
+        margin-top: 20px;
+    }
+    #graph {
+        height: 141px;
+        width: 226px;
+    }
+    #all-people-num {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        color:#718aa6;
+    }
+    #all-people-num span {
+        margin-left: 15px;
+        font-family: Arial;
+        font-size: 24px;
+        color: #40aae3;
+        font-weight: bolder;
+        text-shadow: 1px 2px 1px #919191;
+    }
+    #num-area {
+        float: right;
+        width: 226px;
+        margin-top: 20px;
+        text-align: start;
+    }
+    #num-area .bad-title {
+        font-family: "MicroSoft YaHei";
+        font-size: 16px;
+        color: #718aa6;
+    }
+    #num-area .bad-title,#num-area .bad-num {
+        margin-right: 20px;
+    }
+    #num-area .bad-num,#num-area .bad-scale {
+        font-family: Arial;
+        font-size: 18px;
+        color: #40aae3;
+    }
+    #num-area span {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    #num-area .bad-title span {
+        margin-bottom: 13px;
+    }
+    .left-title {
+        float: left;
+        width: 50px;
+        text-align: center;
+        height: 300px;
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+    .left-title-name span {
+        font-size: 24px;
+        color: #718aa6;
+        line-height:24px;
+        display: block;
+        margin: 0;
+        padding:0
+    }
+    .left-content {
+        width: 154px;
+        float: right;
+        margin-right: 30px;
+    }
+    .left-content .btn-group-vertical button {
+        width: 154px;
+        height: 44px;
+        margin-bottom: 14px;
+        background: #f6f9fe;
+        border-radius: 0;
+        border: 1px solid #dedede;
+        font-size: 16px;
+        color: #629be6;
+    }
+    .myangle {
+        width: 14px;
+        height: 14px;
+        float: right;
+        margin-top: 15px;
+        margin-right: -14px;
+        border:7px solid;
+        border-color: transparent transparent transparent #629be6;
+        visibility:hidden
+    }
+    #lesions-statistic {
+        background: transparent;
+        padding: 20px 36px;
+    }
+    #composite-statistic {
+        padding: 20px;
+        background: transparent;
+    }
+    .composite-statistic-top {
+        width: 100%;
+        height: 130px;
+    }
+    #data-display {
+        width: 100%;
+        height: 152px;
+        clear: both;
+    }
+    #nerve-checkbox {
+        float: left;
+        width: 226px;
+        height: 130px;
+        background: #e99d59;
+        padding:15px 35px 15px 28px;
+    }
+    #retina-checkbox {
+        float: right;
+        width: 280px;
+        height: 130px;
+        background: #43b6f5;
+        padding: 16px 35px 15px 28px;
+    }
+    #kidney-checkbox {
+        float: left;
+        width: 226px;
+        height: 158px;
+        background: #5ec3ce;
+        padding: 16px 35px 15px 28px;
+    }
+    #blood-vascular-checkbox {
+        float: right;
+        width: 280px;
+        height: 158px;
+        background: #808ae9;
+        padding: 15px 10px;
+    }
+    input[type="checkbox"] {
+        visibility: hidden;
+    }
+    .checkbox-title {
+        font-size: 14px;
+        color: #fff;
+        /*width: 50px;
+        height: 14px;*/
+        background: url("../../images/box.png") no-repeat;
+        background-position: 1px 3px;
+        vertical-align: middle;
+        padding-left: 20px;
+        border-color: #fff;
+    }
+    .box-title-margin {
+        height:30px;
+        margin-top: 18px;
+    }
+    .blood-vascular-select-title {
+        float: left;
+    }
+    .blood-vascular-select-title span {
+        font-size: 14px;
+        color: #fff;
+        line-height:14px;
+        display: block;
+        margin: 0;
+        padding:0
+    }
+    .blood-vascular-select-icon {
+        width: 10px;
+        height: 10px;
+        float: right;
+        margin-top: -13px;
+        margin-bottom: 8px;
+        margin-right: 0;
+        border:5px solid;
+        border-color: transparent transparent transparent #fff;
+    }
+    .text-ratate {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }
+    .checked-risk {
+        /*display: none;*/
+        height: 128px;
+        width: 100%;
+    }
+    .unchecked-risk {
+        display: none;
+        height: 128px;
+        width: 100%
+    }
+    #of-bad-graph {
+        width: 226px;
+        height: 112px;
+        float:left;
+    }
+    #of-normal-graph {
+        width: 278px;
+        height: 112px;
+        margin-left: 14px;
+        float: right;
+    }
+    #no-bad-of-normal {
+        width: 520px;
+        height:112px
+    }
+    .box-select-tooltip {
+        text-align: center;
+        line-height: 152px;
+        font-size: 18px;
+        color: #b3b3b3;
+    }
+    .checked-sitiuation-num {
+        font-size: 14px;
+        color:#718aa6;
+        text-align: center;
+        margin-top: 10px
+    }
+    .checked-sitiuation-num span {
+        margin-left: 10px;
+        font-size: 16px;
+        color: #40aae3
+    }
+    .nerve-retina-graph-title {
+        margin-top: 52px;
+        text-align: center;
+        font-size: 18px;
+        color:#718aa6;
+    }
+    .nerve-graph-area,.retina-graph-area {
+        margin-top: 15px;
+        width: 560px;
+        height: 390px;
+        background: #f6f9fe;
+        border: 1px solid #dedede;
+    }
+    #nerve-graph {
+        float: left;
+        width: 560px;
+        height: 390px;
+    }
+    #retina-graph {
+        float: left;
+        width:560px;
+        height: 390px;
+    }
+    .right div {
+        display: none;
+    }
+    .lower-extremity-vascular-graph-area {
+        width: inherit;
+        height: 480px;
+        background: #f6f9fe;
+        border:1px solid #dedede;
+        margin-top: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #dorsalis-pedis-artery,#ankle-brachial-index {
+        height: 239px;
+        width: 520px;
+    }
+    #dorsalis-pedis-artery-graph {
+        float: left;
+        height: 239px;
+        width: 380px;
+    }
+    #ankle-brachial-index-graph {
+        float: left;
+        height: 239px;
+        width: 380px;
+    }
+    .dorsalis-pedis-artery-title {
+        font-size: 16px;
+        color: #718aa6;
+    }
+    .dorsalis-pedis-artery-total {
+        font-family: Arial;
+        font-size: 28px;
+        font-weight: bold;
+        color: #40aae3;
+    }
+    #kidney-result {
+        width: 100%;
+        height: 100%;
+    }
+    .kidney-tab-title {
+        float: left;
+        padding-bottom: 3px;
+    }
+    #kidney-graph-area{
+        width: 560px;
+        height: 390px;
+        background: #f6f9fe;
+        border: 1px solid #dedede;
+        margin-top: 35px;
+    }
+    #blood-glucose-area {
+        width: 560px;
+        height: 390px;
+        background: #f6f9fe;
+        border: 1px solid #dedede;
+        margin-top: 33px;
+    }
+    #kidney-graph,  #blood-glucose-graph{
+        width: 560px;
+        height: 390px;
+    }
+    .kidney-tab-title:hover {
+        cursor: pointer;
+    }
+    #blood-fat-result {
+        width: 100%;
+        height: 100%;
+    }
+    .blood-glucose-graph-title {
+        height: 20px;
+        font-size:16px;
+        margin:0
+    }
+    #blood-fat-graph-area {
+        width:560px;
+        height: 480px;
+        background: #f6f9fe;
+        border:1px solid #dedede;
+        margin-top:20px;
+    }
+    #blood-fat-pie-graph,#blood-fat-circular-graph{
+        height:240px;
+        width:100%;
+    }
+    .btn-disabled {
+        disable:true
+    }
+</style>
+<div style="width: 100%;height: 100%;padding:20px">
+    <div id="left">
+        <div class="btn-group">
+            <button id="select-county" type="button" class="btn btn-flat">全上海</button>
+            <button id="select-img" type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-caret-down"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li class="county-item">全上海</li>
+                <li class="county-item">黄浦区</li>
+                <li class="county-item">徐汇区</li>
+                <li class="county-item">长宁区</li>
+                <li class="county-item">静安区</li>
+                <li class="county-item">普陀区</li>
+                <li class="county-item">虹口区</li>
+                <li class="county-item">杨浦区</li>
+                <li class="county-item">浦东新区</li>
+                <li class="county-item">闵行区</li>
+                <li class="county-item">宝山区</li>
+                <li class="county-item">嘉定区</li>
+                <li class="county-item">金山区</li>
+                <li class="county-item">松江区</li>
+                <li class="county-item">青浦区</li>
+                <li class="county-item">奉贤区</li>
+                <li class="county-item">崇明区</li>
+            </ul>
+        </div>
+        <div style="width:260px;height: 100%; margin-top: 60px">
+            <div class="left-title">
+                <span class="left-title-icon"><img src="images/arrowtitile.png" alt="icon"></span>
+                <div class="left-title-name" style="margin-top:5px "><!--<p>各项目并发症筛查结果分析</p>-->
+                    <span>各</span>
+                    <span>项</span>
+                    <span>目</span>
+                    <span>并</span>
+                    <span>发</span>
+                    <span>症</span>
+                    <span>筛</span>
+                    <span>查</span>
+                    <span>结</span>
+                    <span>果</span>
+                    <span>分</span>
+                    <span>各</span>
+                    <span>析</span>
+                </div>
+            </div>
+            <div class="left-content">
+                <div class="btn-group-vertical">
+                    <button type="button" disabled onclick="getResult(this,0)">筛查结果汇总</button><span class="myangle" style="visibility: visible"></span>
+                    <button type="button" onclick="getResult(this,1)">周围神经病变</button><span class="myangle"></span>
+                    <button type="button" onclick="getResult(this,2)">视网膜病变</button><span class="myangle"></span>
+                    <button type="button" disabled onclick="getResult(this,3)">下肢血管病变</button><span class="myangle"></span>
+                    <button type="button" disabled onclick="getResult(this,4)">肾脏病变</button><span class="myangle"></span>
+                    <button type="button" disabled onclick="getResult(this,5)">血糖检查</button><span class="myangle"></span>
+                    <button type="button" disabled onclick="getResult(this,6)">血脂检查</button><span class="myangle"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right">
+        <div id="summary-result" class="modal-tab">
+            <div class="tab-title">
+                <ul id="myTab">
+                    <li class="active">
+                        <a href="#lesions-statistic" data-toggle="tab">
+                            病变人数统计
+                        </a>
+                    </li>
+                    <li><a href="#composite-statistic" data-toggle="tab">组合统计</a></li>
+                </ul>
+               <div class="tab-content">
+                   <div id="lesions-statistic" class="tab-pane fade in active">
+                       <div id="top">
+                           <div id="nerve-modal" class="diabetes-type-model">
+                               <div style="text-align: center;margin-top: 10px">
+                                   <div class="text-type" style="margin-bottom: 5px">周围神经病变</div>
+                                   <div>
+                                       <div class="text-title">病变：<span class="text-number" style="margin-left: 10px;">25252人</span></div>
+                                       <div class="text-title" style="margin-left: -35px">比例：<span class="text-number" style="margin-left: 10px">35%</span></div></span>
+                                   </div>
+                               </div>
+                           </div>
+                           <div id="retina-modal" class="diabetes-type-model">
+                               <div style="text-align: center;margin-top: 10px">
+                                   <div class="text-type"  style="margin-bottom: 5px">视网膜病变</div>
+                                   <div>
+                                       <div class="text-title">病变：<span class="text-number" style="margin-left: 10px">25252人</span></div>
+                                       <div class="text-title" style="margin-left: -35px">比例：<span class="text-number" style="margin-left: 10px">35%</span></div></span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div id="centre">
+                           <div id="all-people-num">筛查病变总人数<span>25226人</span></div>
+                           <div id="centre-left">
+                               <div id="num-area">
+                                  <!-- <span class="bad-title">1项病变</span><span class="bad-num">500人</span><span class="bad-scale">50%</span>
+                                   <br/>
+                                   <span class="bad-title">2项病变</span><span class="bad-num">5050人</span><span class="bad-scale">50%</span>
+                                   <br/>
+                                   <span class="bad-title">3项病变</span><span class="bad-num">50人</span><span class="bad-scale">50%</span>
+                                   <br/>
+                                   <span class="bad-title">4项病变</span><span class="bad-num">5000人</span><span class="bad-scale">50%</span>-->
+                                   <div class="bad-scale" style="float: right">
+                                       <span>20%</span>
+                                       <br/>
+                                       <span>5%</span>
+                                       <br/>
+                                       <span>25%</span>
+                                       <br/>
+                                       <span>50%</span>
+                                   </div>
+                                   <div class="bad-num" style="float: right">
+                                       <span>500</span>
+                                       <br/>
+                                       <span>50</span>
+                                       <br/>
+                                       <span>1000</span>
+                                       <br/>
+                                       <span>100</span>
+                                   </div>
+                                   <div class="bad-title" style="float: right">
+                                       <span style="margin-top:1px">1项病变</span>
+                                       <br/>
+                                       <span>2项病变</span>
+                                       <br/>
+                                       <span>3项病变</span>
+                                       <br/>
+                                       <span>4项病变</span>
+                                   </div>
+                               </div>
+                           </div>
+                           <div id="graph-area">
+                                <div id="graph"></div>
+                           </div>
+                       </div>
+                       <div id="bottom">
+                           <div id="kidney-modal" class="diabetes-type-model">
+                               <div style="text-align: center;margin-top: 10px">
+                                   <!-- <span class="text-type" style="text-align: center;">周围神经病变</span>
+                                    <br/>
+                                    <span class="text-type">病变：<span class="text-number">25252人</span></span>
+                                    <br/>
+                                    <span class="text-type">比例：<span class="text-number">35%</span></span>-->
+                                   <div class="text-type" style="margin-bottom: 5px">肾脏病变</div>
+                                   <div>
+                                       <div class="text-title">病变：<span class="text-number" style="margin-left: 10px">25252人</span></div>
+                                       <div class="text-title" style="margin-left: -35px">比例：<span class="text-number" style="margin-left: 10px">35%</span></div></span>
+                                   </div>
+                               </div>
+                           </div>
+                           <div id="blood-vascular-modal" class="diabetes-type-model">
+                               <div style="text-align: center;margin-top: 10px">
+                                   <div class="text-type"  style="margin-bottom: 5px">下肢血管病变</div>
+                                   <div>
+                                       <div class="text-title">病变：<span class="text-number" style="margin-left: 10px">25252人</span></div>
+                                       <div class="text-title" style="margin-left: -35px">比例：<span class="text-number" style="margin-left: 10px">35%</span></div></span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div id="composite-statistic" class="tab-pane fade">
+                       <div class="composite-statistic-top">
+                           <div id="nerve-checkbox">
+                               <p class="text-type">周围神经病变</p>
+                               <div class="box-title-margin">
+                                   <div style="float: left">
+                                       <input id="nerve-low-risk" class=" checkbox-size" name="nerve-low-risk" type="checkbox" value="低危">
+                                       <label class="checkbox-title" for="nerve-low-risk">低危</label>
+                                   </div>
+                                   <div style="float: right">
+                                       <input id="nerve-mid-risk" class="checkbox-size" name="nerve-mid-risk" type="checkbox" value="中危">
+                                       <label class="checkbox-title" for="nerve-mid-risk">中危</label>
+                                   </div>
+                               </div>
+                               <div style="float: left">
+                                   <input id="nerve-high-risk" class="checkbox-size" name="nerve-high-risk" type="checkbox" value="高危">
+                                   <label class="checkbox-title" for="nerve-high-risk">高危</label>
+                               </div>
+                           </div>
+                           <div id="retina-checkbox">
+                               <p class="text-type">视网膜病变</p>
+                               <div class="box-title-margin">
+                                   <div style="float: left">
+                                       <input  id="retina-normal-risk" class="checkbox-size" name="retina-normal-risk" type="checkbox" value="正常">
+                                       <label class="checkbox-title" for="retina-normal-risk">正常</label>
+                                   </div>
+                                   <div style="float: left">
+                                       <input id="retina-mid-risk" class="checkbox-size" name="retina-mid-risk" type="checkbox" value="中度">
+                                       <label class="checkbox-title" for="retina-mid-risk">中度</label>
+                                   </div>
+                                   <div style="float: left">
+                                       <input id="retina-add-risk" class="checkbox-size" name="retina-add-risk" type="checkbox" value="增殖">
+                                       <label class="checkbox-title" for="retina-add-risk">增殖</label>
+                                   </div>
+                               </div>
+                               <div>
+                                   <div style="float: left">
+                                       <input id="retina-low-risk" class="checkbox-size" name="retina-low-risk" type="checkbox" value="轻度">
+                                       <label class="checkbox-title" for="retina-low-risk">轻度</label>
+                                   </div>
+                                   <div style="float: left">
+                                       <input id="retina-high-risk" class="checkbox-size" name="retina-high-risk" type="checkbox" value="重度">
+                                       <label class="checkbox-title" for="retina-high-risk">重度</label>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </div>
+                       <div id="data-display" class="clearfix">
+                           <div class="box-select-tooltip" style="display: none">请勾选要搜索的筛查结果</div>
+                           <div class="checked-risk">
+                               <div class="checked-sitiuation-num">勾选病变情况总人数：
+                                   <span style="">25226人</span>
+                               </div>
+                               <div id="of-bad-graph"></div>
+                               <div id="of-normal-graph"></div>
+                           </div>
+                           <div class="unchecked-risk">
+                               <div class="checked-sitiuation-num">勾选病变情况总人数：
+                                   <span style="">25226人</span>
+                               </div>
+                               <div id="no-bad-of-normal"></div>
+                           </div>
+                       </div>
+                       <div class="composite-statistic-bottom">
+                           <div id="kidney-checkbox">
+                               <p class="text-type">肾脏病变</p>
+                               <div class="box-title-margin">
+                                   <div style="float: left">
+                                       <input id="kidney-low-risk" class="checkbox-size" name="kidney-low-risk" type="checkbox" value="低危">
+                                       <label class="checkbox-title" for="kidney-low-risk">低危</label>
+                                   </div>
+                                   <div style="float: right;margin-right: 14px">
+                                       <input id="kidney-high-risk" class="checkbox-size" name="kidney-high-risk" type="checkbox" value="高危">
+                                       <label class="checkbox-title" for="kidney-high-risk">高危</label>
+                                   </div>
+                               </div>
+                               <div>
+                                   <div style="float: left">
+                                       <input  id="kidney-mid-risk" class="checkbox-size" name="kidney-mid-risk" type="checkbox" value="">
+                                       <label class="checkbox-title" for="kidney-mid-risk">中危</label>
+                                   </div>
+                                   <div style="float: right">
+                                       <input id="kidney-extreme-high-risk" class="checkbox-size" name="kidney-extreme-high-risk" type="checkbox" value="极高危">
+                                       <label class="checkbox-title" for="kidney-extreme-high-risk">极高危</label>
+                                   </div>
+                               </div>
+                           </div>
+                           <div id="blood-vascular-checkbox">
+                               <p class="text-type">下肢血管病变</p>
+                               <div class="blood-vascular-select-title box-title-margin">
+                                   <div class="blood-vascular-select-icon"></div>
+                                   <span>踝</span>
+                                   <span>肱</span>
+                                   <span>指</span>
+                                   <span>数</span>
+                                   <span class="text-ratate" style="height: 9px;margin-left: 4px;">A</span>
+                                   <span class="text-ratate" style="height: 9px;margin-left: 3px">B</span>
+                                   <span class="text-ratate" style="height: 7px;margin-left: 5px">I</span>
+                               </div>
+                               <div style="float:left" style="margin-left: -3px">
+                                   <div>
+                                       <input id="blood-vascular-normal-risk" class="checkbox-size" name="blood-vascular-normal-risk" type="checkbox" value="正常">
+                                       <label class="checkbox-title" for="blood-vascular-normal-risk">正常</label>
+                                   </div>
+                                   <div>
+                                       <input id="blood-vascular-low-risk" class="checkbox-size" name="blood-vascular-low-risk" type="checkbox" value="轻度">
+                                       <label class="checkbox-title" for="blood-vascular-low-risk">轻度</label>
+                                   </div>
+                                   <div>
+                                       <input id="blood-vascular-mid-risk" class="checkbox-size" name="blood-vascular-mid-risk" type="checkbox" value="中度">
+                                       <label class="checkbox-title" for="blood-vascular-mid-risk">中度</label>
+                                   </div>
+                                   <div>
+                                       <input id="blood-vascular-high-risk" class="checkbox-size" name="blood-vascular-high-risk" type="checkbox" value="重度">
+                                       <label class="checkbox-title" for="blood-vascular-high-risk">重度</label>
+                                   </div>
+                               </div>
+
+                               <div class="blood-vascular-select-title box-title-margin" style="margin-left: 20px">
+                                   <div class="blood-vascular-select-icon"></div>
+                                   <span>足</span>
+                                   <span>背</span>
+                                   <span>动</span>
+                                   <span>脉</span>
+                                   <span>搏</span>
+                                   <span>动</span>
+                               </div>
+                               <div style="float:left;text-align: start;margin-left: -3px">
+                                   <div>
+                                       <input id="dorsalis-pedis-normal-risk" class="checkbox-size" name="dorsalis-pedis-normal-risk" type="checkbox" value="正常">
+                                       <label class="checkbox-title" for="dorsalis-pedis-normal-risk">触及双侧对称</label>
+                                   </div>
+                                   <div>
+                                       <input id="dorsalis-pedis-low-risk" class="checkbox-size" name="dorsalis-pedis-low-risk" type="checkbox" value="轻度">
+                                       <label class="checkbox-title" for="dorsalis-pedis-low-risk">触及左侧弱或消失</label>
+                                   </div>
+                                   <div>
+                                       <input id="dorsalis-pedis-mid-risk" class="checkbox-size" name="dorsalis-pedis-mid-risk" type="checkbox" value="中度">
+                                       <label class="checkbox-title" for="dorsalis-pedis-mid-risk">触及右侧弱或消失</label>
+                                   </div>
+                                   <div>
+                                       <input id="dorsalis-pedis-high-risk" class="checkbox-size" name="dorsalis-pedis-high-risk" type="checkbox" value="重度">
+                                       <label class="checkbox-title" for="dorsalis-pedis-high-risk">未触及</label>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div id="nerve-result" class="visualization modal-tab">
+            <div class="nerve-retina-graph-title">周围神经病变</div>
+            <div class="nerve-graph-area">
+                <div id="nerve-graph"></div>
+            </div>
+        </div>
+        <div id="retina-result"  class="visualization modal-tab">
+            <div class="nerve-retina-graph-title">视网膜病变</div>
+            <div class="retina-graph-area">
+                <div id="retina-graph"></div>
+            </div>
+        </div>
+        <div id="lower-extremity-vascular-result"  class="visualization modal-tab">
+            <div class="nerve-retina-graph-title" style="margin-top:0">下肢血管病变</div>
+            <div class="lower-extremity-vascular-graph-area">
+                <div id="dorsalis-pedis-artery">
+                    <div style="width: 140px;float: left">
+                        <div class="dorsalis-pedis-artery-title" style="font-weight: bold;margin-top:70px">足背动脉搏动检查</div>
+                        <div class="dorsalis-pedis-artery-title" style="margin-top:25px">筛查总人数：</div>
+                        <div class="dorsalis-pedis-artery-total">--人</div>
+                    </div>
+                    <div id="dorsalis-pedis-artery-graph"></div>
+                </div>
+                <div style="height: 1px;background:#dedede"></div>
+                <div id="ankle-brachial-index">
+                    <div id="ankle-brachial-index-graph"></div>
+                    <div style="width: 140px;float: right">
+                        <div class="dorsalis-pedis-artery-title" style="font-weight: bold;margin-top:70px">踝肱指数ABI检查</div>
+                        <div class="dorsalis-pedis-artery-title" style="margin-top:25px">筛查总人数：</div>
+                        <div class="dorsalis-pedis-artery-total">--人</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="kidney-result" class="visualization modal-tab">
+            <div class="nerve-retina-graph-title" style="margin-top:38px;height:20px">
+                <div class="kidney-tab-title" style="margin-left:125px;border-bottom: 3px solid #43b6f5">肾脏病变</div>
+                <div class="kidney-tab-title" style="margin-left: 60px">尿ACR</div>
+                <div class="kidney-tab-title" style="margin-left:60px">EGFR</div>
+            </div>
+            <div id="kidney-graph-area">
+                <div id="kidney-graph"></div>
+            </div>
+            <div id="kidney-tab-tooltip" style="display: none">0</div>
+        </div>
+        <div id="blood-glucose-result" class="visualization modal-tab">
+            <div class="nerve-retina-graph-title blood-glucose-graph-title" style="margin-top:39px;height:20px">
+                <div class="kidney-tab-title" style="margin-left:90px;border-bottom: 3px solid #43b6f5">糖化血红蛋白</div>
+                <div class="kidney-tab-title" style="margin-left: 50px">空腹血糖</div>
+                <div class="kidney-tab-title" style="margin-left:50px">餐后2小时血糖</div>
+            </div>
+            <div id="blood-glucose-area">
+                <div id="blood-glucose-graph"></div>
+            </div>
+            <div id="blood-glucose-tooltip" style="display: none">0</div>
+        </div>
+        <div id="blood-fat-result" class="visualization modal-tab">
+            <div class="nerve-retina-graph-title blood-glucose-graph-title" >
+                <div class="kidney-tab-title" style="margin-left:85px;border-bottom: 3px solid #43b6f5">低密度</div>
+                <div class="kidney-tab-title" style="margin-left: 50px">高密度</div>
+                <div class="kidney-tab-title" style="margin-left:50px">甘油三酯</div>
+                <div class="kidney-tab-title" style="margin-left:50px">总胆固醇</div>
+            </div>
+            <div id="blood-fat-graph-area">
+                <div id="blood-fat-pie-graph"></div>
+                <div id="blood-fat-circular-graph"></div>
+            </div>
+            <div id="blood-fat-tooltip" style="display: none">0</div>
+        </div>
+    </div>
+</div>
+
+<script src="pages/home/graphset.js"></script>
+<script>
+    $(function() {
+        //下拉框点击事件
+        $('.county-item').click(function() {
+            $("#select-county").text(($(this).text()));
+           /* getResult(null,0);*/
+            //fixme 第一个tab没数据时的临时方案
+            getResult(null,1);
+        });
+        //初始化checkbox选中状态
+        $('.checkbox-size').click(function() {
+            if($(this).attr('checked')) {
+                $(this).attr('checked',false);
+                $(this).next().css('background','url("../../images/box.png") no-repeat');
+                $(this).next().css('background-position','1px 3px');
+            }else {
+                $(this).attr('checked',true);
+                $(this).next().css('background','url("../../images/box_selected.png") no-repeat');
+                $(this).next().css('background-position','1px 3px');
+            }
+        });
+        /*getResult(null,0);*/
+        //fixme 第一个tab没数据时的临时方案
+        getResult(null,1);
+        //肾脏病变,血糖病变模块结果分析切换分析选项
+        $('.kidney-tab-title').click(function() {
+            $(this).css('border-bottom','3px solid #43b6f5');
+            $(this).siblings().css('border-bottom','');
+            switch ($(this).text()) {
+                case '肾脏病变':
+                    $('#kidney-tab-tooltip').html('0');
+                    initGraph('kidney-graph');
+                    break;
+                case '尿ACR':
+                    $('#kidney-tab-tooltip').html('1');
+                    initGraph('kidney-graph');
+                    break;
+                case 'EGFR':
+                    $('#kidney-tab-tooltip').html('2');
+                    initGraph('kidney-graph');
+                    break;
+                case '糖化血红蛋白':
+                    $('#blood-glucose-tooltip').html('0');
+                    initGraph('blood-glucose-graph');
+                    break;
+                case '空腹血糖':
+                    $('#blood-glucose-tooltip').html('1');
+                    initGraph('blood-glucose-graph');
+                    break;
+                case '餐后2小时血糖':
+                    $('#blood-glucose-tooltip').html('1');
+                    initGraph('blood-glucose-graph');
+                    break;
+                case '低密度':
+                    $('#blood-fat-tooltip').html('0');
+
+            }
+        })
+        initGraph('graph');//病变统计
+        initGraph('of-bad-graph');//组合统计-勾选了非正常病变情况-在并变情况中占比情况
+        initGraph('of-normal-graph'); //组合统计-勾选了非正常病变情况-在所有筛查人群中的占比情况
+        initGraph('no-bad-of-normal');//组合统计-未勾选非正常病变情况-在所有筛查人群中的占比情况
+        //initGraph('nerve-graph');//周围神经病变情况分析结果饼图
+        //initGraph('retina-graph');//视网膜病变情况分析结果饼图
+    });
+
+   //获取相应模块的数据
+    function getResult(v,flag) {
+        if(v == null) {
+            v = $('.btn-group-vertical').find('button').eq(flag);
+        }
+        changeBackground(v,flag);
+        var county = $('#select-county').text().trim();
+        if(county == '全上海') {
+            county = '上海市';
+        }
+        $.getJSON('api/result/analysis',{flag:flag,county:county},function(rm) {
+            if(rm.code == 1) {
+                if(rm.result) {
+                    var data = rm.result;
+                }
+                switch(flag) {
+                    case 0: //当点击模块为筛查汇总模块
+                        $('#summary-result').css('display','');
+                        $('#summary-result').siblings().css('display','none');
+                        //initData(basicData);//初始化病变人数统计模块数据
+                        initGraph('graph',data);//渲染病变人数统计模块饼图
+                        break;
+                    case 1://当前模块为周围神经病变结果分析
+                        $('#nerve-result').css('display','');
+                        $('#nerve-result').siblings().css('display','none');
+                        initGraph('nerve-graph',data);
+                        break;
+                    case 2://当前模块为视网膜病变结果分析
+                        $('#retina-result').css('display','');
+                        $('#retina-result').siblings().css('display','none');
+                        initGraph('retina-graph',data);
+                        break;
+                    case 3://当前模块为下肢血管病变结果分析
+                        $('#lower-extremity-vascular-result').css('display','');
+                        $('#lower-extremity-vascular-result').siblings().css('display','none');
+                        initGraph('dorsalis-pedis-artery-graph',data);
+                        initGraph('ankle-brachial-index-graph',data);
+                        break;
+                    case 4://当前模块为肾脏模块结果分析
+                        $('#kidney-result').css('display','');
+                        $('#kidney-result').siblings().css('display','none');
+                        initGraph('kidney-graph',data);
+                        break;
+                    case 5://血糖分析模块
+                        $('#blood-glucose-result').css('display','');
+                        $('#blood-glucose-result').siblings().css('display','none');
+                        initGraph('blood-glucose-graph',data);
+                        break;
+                    case 6://血脂
+                        $('#blood-fat-result').css('display','');
+                        $('#blood-fat-result').siblings().css('display','none')
+                        initGraph('blood-fat-pie-graph',data);
+                        initGraph('blood-fat-circular-graph',data);
+                        break;
+                    default:
+
+                }
+            }else {
+                //todo 错误处理
+            }
+        });
+    }
+
+    function initData(){}
+
+    //改变button背景颜色
+    function changeBackground(v,flag) {
+        $('#right .modal-tab').eq(flag).removeClass('visualization');
+        $('#right .modal-tab').eq(flag).siblings().addClass('visualization')
+        $(v).css({
+            "color":"#fff",
+            "background": "#629be6",
+            "border": "1px solid #629be6"
+        });
+        $(v).siblings('.myangle').css('visibility', 'hidden');
+        $(v).next('.myangle').css('visibility', 'visible');
+        $(v).siblings('button').css({
+            "background": "#f6f9fe",
+            "border": "1px solid #dedede",
+            "color": "#629be6"
+        });
+    }
+    //饼图初始化
+    function initGraph(id,data) {
+        var GArea = document.getElementById(id);
+        GArea.innerHTML = "";
+        var graph = echarts.init(GArea);
+       switch (id) {
+           case 'graph':
+               var title = graph_set.lesions_statistic.title;
+               var grid = graph_set.lesions_statistic.grid;
+               var legend = graph_set.lesions_statistic.legend;
+               var series = graph_set.lesions_statistic.series;
+               break;
+           case 'of-bad-graph':
+               var title = graph_set.composite_statistic.of_bad.title;
+               var grid = graph_set.composite_statistic.of_bad.grid;
+               var legend = graph_set.composite_statistic.of_bad.legend;
+               var series = graph_set.composite_statistic.of_bad.series;
+               break;
+           case 'of-normal-graph':
+               var title = graph_set.composite_statistic.of_normal.title;
+               var grid = graph_set.composite_statistic.of_normal.grid;
+               var legend = graph_set.composite_statistic.of_normal.legend;
+               var series = graph_set.composite_statistic.of_normal.series;
+               break;
+           case 'no-bad-of-normal':
+               var title = graph_set.composite_statistic.no_bad_of_normal.title;
+               var grid = graph_set.composite_statistic.no_bad_of_normal.grid;
+               var legend = graph_set.composite_statistic.no_bad_of_normal.legend;
+               var series = graph_set.composite_statistic.no_bad_of_normal.series;
+               break;
+           case 'nerve-graph':
+               var title = graph_set.nerve_graph.title;
+               var grid = graph_set.nerve_graph.grid;
+               var legend = graph_set.nerve_graph.legend;
+               var series = graph_set.nerve_graph.series;
+               title.subtext = data?data.per_cnt:'--' + '人';
+               legend.formatter = function(name) {
+                   switch(name) {
+                       case '低危':
+                           var low = data?data.per_cnt_low:'--';
+                           return ' ' + name + '  '+ low +'人';
+                           break;
+                       case '中危':
+                           var mid = data?data.per_cnt_mid:'--';
+                           return ' ' + name + '  '+ mid +'人';
+                           break;
+                       case '高危':
+                           var high = data?data.per_cnt_high:'--';
+                           return ' ' + name + '  '+ high +'人';
+                           break;
+                   }
+               };
+               series[0].data[0].value = data?data.per_cnt_low_rate:'--';
+               series[0].data[1].value = data?data.per_cnt_mid_rate:'--';
+               series[0].data[2].value = data?data.per_cnt_high_rate:'--';
+               var tooltip = {
+                   trigger: 'item',
+                   formatter: function(params,ticket,callback) {
+                       var series = params.seriesName;
+                       switch (params.name) {
+                           case '低危':
+                               var value = data?data.per_cnt_low:'--';
+                               var percent = data?data.per_cnt_low_rate*100:'--';
+                               break;
+                           case '中危':
+                               var value = data?data.per_cnt_mid:'--';
+                               var percent = data?data.per_cnt_mid_rate*100:'--';
+                               break;
+                           case '高危':
+                               var value = data?data.per_cnt_high:'--';
+                               var percent = data?data.per_cnt_high_rate*100:'--';
+                               break;
+                       }
+                       if(percent != '--') {
+                           percent = percent.toFixed(1);
+                       }
+                       return series +'<br/>'+ params.name+': '+value + '(' + percent + '%)';
+                   }
+               };
+               /*}*/
+               break;
+           case 'retina-graph':
+               var title = graph_set.retina_graph.title;
+               var grid = graph_set.retina_graph.grid;
+               var legend = graph_set.retina_graph.legend;
+               var series = graph_set.retina_graph.series;
+               title.subtext = data?data.per_cnt:'--' + '人';
+               legend.formatter = function(name) {
+                   switch(name) {
+                       case '正常':
+                           var normal = data?data.per_cnt_normal:'--';
+                           return ' ' + name + '  '+ normal +'人';
+                           break;
+                       case '轻度':
+                           var low = data?data.per_cnt_low:'--';
+                           return ' ' + name + '  '+ low +'人';
+                           break;
+                       case '中度':
+                           var mid = data?data.per_cnt_mid:'--';
+                           return ' ' + name + '  '+ mid +'人';
+                           break;
+                       case '重度':
+                           var high = data?data.per_cnt_high:'--';
+                           return ' ' + name + '  '+ high +'人';
+                           break;
+                       case '增殖':
+                           var stage = data?data.per_cnt_stage:'--';
+                           return ' ' + name + '  '+ stage +'人';
+                   }
+               };
+               series[0].data[0].value = data?data.per_cnt_normal_rate:'--';
+               series[0].data[1].value = data?data.per_cnt_low_rate:'--';
+               series[0].data[2].value = data?data.per_cnt_mid_rate:'--';
+               series[0].data[3].value = data?data.per_cnt_high_rate:'--';
+               series[0].data[4].value = data?data.per_cnt_stage_rate:'--';
+               var tooltip = {
+                   trigger: 'item',
+                   formatter: function(params,ticket,callback) {
+                       var series = params.seriesName;
+                       switch (params.name) {
+                           case '正常':
+                               var value = data?data.per_cnt_normal:'--';
+                               var percent = data?data.per_cnt_normal_rate*100:'--';
+                               break;
+                           case '轻度':
+                               var value = data?data.per_cnt_low:'--';
+                               var percent = data?data.per_cnt_low_rate*100:'--';
+                               break;
+                           case '中度':
+                               var value = data?data.per_cnt_mid:'--';
+                               var percent = data?data.per_cnt_mid_rate*100:'--';
+                               break;
+                           case '重度':
+                               var value = data?data.per_cnt_high:'--';
+                               var percent = data?data.per_cnt_high_rate*100:'--';
+                               break;
+                           case '增殖':
+                               var value = data?data.per_cnt_stage:'--';
+                               var percent = data?data.per_cnt_stage_rate*100:'--';
+                               break;
+                       }
+                       if(percent != '--') {
+                           percent = percent.toFixed(1);
+                       }
+                       return series +'<br/>'+ params.name+': '+value + '(' + percent + '%)';
+                   }
+               };
+               break;
+           case 'dorsalis-pedis-artery-graph':
+               var title=graph_set.dorsalis_pedis_artery_graph.title;
+               var grid = graph_set.dorsalis_pedis_artery_graph.grid;
+               var legend = graph_set.dorsalis_pedis_artery_graph.legend;
+               var series = graph_set.dorsalis_pedis_artery_graph.series;
+               break;
+           case 'ankle-brachial-index-graph':
+               var title=graph_set.ankle_brachial_index_graph.title;
+               var grid = graph_set.ankle_brachial_index_graph.grid;
+               var legend = graph_set.ankle_brachial_index_graph.legend;
+               var series = graph_set.ankle_brachial_index_graph.series;
+               break;
+           case 'kidney-graph':
+               var tag = Number($('#kidney-tab-tooltip').text());
+               if(tag == 0) {
+                   var title=graph_set.kidney_graph.title;
+                   var grid = graph_set.kidney_graph.grid;
+                   var legend = graph_set.kidney_graph.legend;
+                   var series = graph_set.kidney_graph.series;
+                }
+               if(tag == 1) {
+                   var title=graph_set.ACR_graph.title;
+                   var grid = graph_set.ACR_graph.grid;
+                   var legend = graph_set.ACR_graph.legend;
+                   var series = graph_set.ACR_graph.series;
+               }
+               if(tag == 2) {
+                   var title=graph_set.egfr_graph.title;
+                   var grid = graph_set.egfr_graph.grid;
+                   var legend = graph_set.egfr_graph.legend;
+                   var series = graph_set.egfr_graph.series;
+               }
+               break;
+           case 'blood-glucose-graph':
+               var tag = Number($('#blood-glucose-tooltip').text());
+               if(tag == 0 ||tag ==1 || tag == 2) {
+                   var title=graph_set.blood_glucose_graph_0.title;
+                   var grid = graph_set.blood_glucose_graph_0.grid;
+                   var legend = graph_set.blood_glucose_graph_0.legend;
+                   var series = graph_set.blood_glucose_graph_0.series;
+               }
+               /*if(tag == 1) {
+                   var title=graph_set.blood_glucose_graph_1.title;
+                   var grid = graph_set.blood_glucose_graph_1.grid;
+                   var legend = graph_set.blood_glucose_graph_1.legend;
+                   var series = graph_set.blood_glucose_graph_1.series;
+               }
+               if(tag == 2) {
+                   var title=graph_set.blood_glucose_graph_2.title;
+                   var grid = graph_set.blood_glucose_graph_2.grid;
+                   var legend = graph_set.blood_glucose_graph_2.legend;
+                   var series = graph_set.blood_glucose_graph_2.series;
+               }*/
+               break;
+           case 'blood-fat-pie-graph':
+               var title=graph_set.blood_fat_pie_graph.title;
+               var grid = graph_set.blood_fat_pie_graph.grid;
+               var legend = graph_set.blood_fat_pie_graph.legend;
+               var series = graph_set.blood_fat_pie_graph.series;
+               break;
+           case 'blood-fat-circular-graph':
+               var title=graph_set.blood_fat_circular_graph.title;
+               var grid = graph_set.blood_fat_circular_graph.grid;
+               var legend = graph_set.blood_fat_circular_graph.legend;
+               var series = graph_set.blood_fat_circular_graph.series;
+               break;
+       }
+        if(!tooltip) {
+            tooltip = {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            };
+        }
+        var option = {
+            title:title,
+            grid: grid,
+            tooltip : tooltip,
+            legend: legend,
+            series: series
+        };
+        graph.setOption(option);
+    }
+</script>

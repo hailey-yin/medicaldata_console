@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>糖尿病并发症</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        form {
+            padding-top: 100px;
+            margin: 0 auto;
+            width: 40%;
+            max-width: 350px;
+            min-height: 100%;
+            margin-bottom: -60px;
+        }
+
+        form>div {
+            min-height: 50px;
+            width: 100%;
+        }
+
+        input.form-control {
+            margin: 10px 0;
+            border-radius: 0;
+        }
+
+        .login-title {
+            height: 60px;
+        }
+
+        .login-title>img {
+            height: 100%;
+            margin: 0 10px;
+        }
+
+        .login-title>h3 {
+            color: #09c;
+            font-family: '幼圆', "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: inline;
+            vertical-align: bottom;
+        }
+
+        .login-title>span {
+            vertical-align: bottom;
+            font-size: 120%;
+        }
+
+        .btn {
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            height: 60px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="checkbox"]+span {
+            margin-right: 10px;
+            font-weight: 400;
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-weight: 500;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<div id="process-shadow" style="position:fixed;top:0;bottom: 0;left: 0;right: 0;z-index:998;display: none;background-color: black;opacity: 0.3;">
+    <i class="icon-spinner icon-spin icon-2x" style="color:white;position:fixed;top:45%;left: 50%;"></i> <br>
+    <p style="font-size:120%;color:white;position:fixed;top:50%;left: 46%;">正在登陆，请稍等...</p>
+</div>
+<form id="login-form" method="post" action="">
+    <div class="login-title">
+        <h3>
+            <strong>糖尿病并发症数据录入后台</strong>
+        </h3>
+    </div>
+    <div>
+        <input name="login_name" type="text" class="form-control" placeholder="请输入用户名" required>
+    </div>
+    <div>
+        <input name="login_password" type="password" class="form-control"  placeholder="请输入密码" required>
+    </div>
+
+    <div>
+        <input type="button" class="btn btn-success" value="登&nbsp陆"  style="width: 100%" onclick="login()">
+    </div>
+    <div></div>
+</form>
+<footer>
+    <div>
+        <p class="big">
+            <a target="_blank" href="http://www.wondersgroup.com/about-wd/201412310639133820.html">关于我们</a>
+            <a target="_blank" href="http://www.wondersgroup.com/news">服务公告</a>
+            <a target="_blank" href="http://www.wondersgroup.com/contact">联系我们</a>
+        </p>
+        <p>&copy; 1995 - 2016 WONDERS INFORMATION CO., LTD. ALL RIGHTS RESERVED. 万达信息股份有限公司版权所有 沪ICP备05002296号</p>
+    </div>
+</footer>
+</body>
+<script type="text/javascript">
+    document.onkeydown = function(e) {
+        var event = e || window.event;
+        var code = event.keyCode || event.which || event.charCode;
+        if (code == 13) {
+            login();
+        }
+    }
+    $(function() {
+        $("input[name='login_name']").focus();
+    });
+
+    function login() {
+        if ($("input[name='login_name']").val() == ""
+                || $("input[name='login_password']").val() == "") {
+            alert("用户名或密码为空，请输入");
+            $("input[name='login_name']").focus();
+        } else {
+            //ajax异步提交
+            $.ajax({
+                type : "POST",
+                url : "login",
+                data : $("#login-form").serialize(), //序列化
+                beforeSend:function(){
+                    $('#process-shadow').css('display','block');
+                },
+                error : function(request) { // 设置表单提交出错
+                    $('#process-shadow').css('display','none');
+                    alert('登陆出错！');
+                },
+                success : function(res) {
+                    $('#process-shadow').css('display','none');
+                    if (res.code === 1) {
+                        location.href = 'pages/back_page/complications.html';
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>
+</html>

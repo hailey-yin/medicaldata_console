@@ -1,0 +1,455 @@
+<style>
+    .analysis-title-div {
+        width: 100%;
+        color: #718AA6;
+        font-size: 27px;
+        text-align: center;
+        padding-top: 16px;
+    }
+
+    .analysis-title-div img {
+        padding: 0 7px 5px 0;
+    }
+
+    .tab-row {
+        height: 60px;
+    }
+
+    .left-tab {
+        float: left;
+        margin-top: 20px;
+        margin-left: 15px;
+    }
+
+    .left-tab > .btn, .right-tab > .btn {
+        border-radius: 0;
+        width: 54px;
+        margin: 0 5px;
+        font-size: 15px;
+        background-color: #ffffff;
+        color:#718AA6;
+        cursor: pointer;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .left-tab >.btn:hover, .right-tab >.btn:hover, .button-row > .btn:hover {
+        background-color: #d0e5f7;
+        color: #629be6;
+
+    }
+
+    .left-tab >.btn-active, .right-tab >.btn-active {
+        border-bottom: 3px solid #45c8dc;
+    }
+
+    .center-text {
+        float: left;
+        margin-top: 13px;
+        margin-left: 170px;
+    }
+
+    .center-text span {
+        float: left;
+        font-size: 15px;
+        padding: 9px 8px 0 0;
+        color:#718AA6;
+    }
+
+    .center-text p {
+        float: left;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        color:#40aae3;
+    }
+
+    .right-tab {
+        float: right;
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+
+    .button-row {
+        height: 50px;
+        padding: 10px 0 0 20px;
+    }
+
+    .button-row .btn {
+        width: 125px;
+        height: 36px;
+        border-radius: 0;
+        margin-right: 6px;
+        font-size: 15px;
+        background-color: #f6f9fe;
+        border: 1.5px solid #f0f0f0;
+        color: #629be6;
+    }
+
+    .button-row >.btn-active {
+        background-color: #629be6;
+        color: #ffffff;
+    }
+
+    .charts-row, .charts-area {
+        height: 200px;
+    }
+
+    .pie-chart {
+        float: left;
+        width: 200px;
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+
+    .bar-graph {
+        float: left;
+        width: 640px;
+        height: 100%;
+    }
+
+    .charts-area {
+        line-height:170px;
+        text-align: center;
+        color: #b3b3b3;
+        font-size: 18px;
+    }
+
+</style>
+<div class="analysis-title-div">
+    <img src="img/home/icon2.png">糖尿病并发症筛查完成情况分析
+</div>
+<div class="tab-row">
+    <div class="left-tab">
+        <button class="btn btn-sm btn-active" value="0">全部</button>
+        <button class="btn btn-sm" value="1" disabled>早发现</button>
+    </div>
+    <div class="center-text">
+        <span id="total-screening-text">参加筛查总人数</span>
+        <p id="total-screening-population">8888人</p>
+    </div>
+    <div class="right-tab">
+        <button class="btn btn-sm btn-active" value="0">已完成</button>
+        <button class="btn btn-sm" value="1">未完成</button>
+    </div>
+</div>
+<div class="button-row">
+    <button class="btn btn-sm btn-active" value="0">周围神经病变</button>
+    <button class="btn btn-sm btn-active" value="1">视网膜病变</button>
+    <button class="btn btn-sm" value="2" disabled>下肢血管病变</button>
+    <button class="btn btn-sm" value="3" disabled>肾脏病变</button>
+    <button class="btn btn-sm" value="4" disabled>血糖检查</button>
+    <button class="btn btn-sm" value="5" disabled>血脂检查</button>
+</div>
+<div class="charts-row">
+    <div class="pie-chart" id="pie-chart"></div>
+    <div class="bar-graph" id="bar-graph"></div>
+</div>
+<div class="charts-area" style="display: none">
+    <p id="charts-area-text"></p>
+</div>
+<script>
+    var CountyData = []; //各区县数据
+    var CityData = {}; //全上海数据
+    var Divident = 0; //饼图分子
+    var Divisor = 0; //饼图分母
+    var Rate = 0; //饼图比例
+    var LeftTab = $('.left-tab > .btn-active').attr('value');//左侧排行规则,0全部 1早发现
+    var RightTab = $('.right-tab > .btn-active').attr('value');//右侧排行规则,0已完成 1已完成
+    var SelectedButton = [1,1,1,1,1,1]; //0 未选，1 已选，周围神经病变/视网膜病变/下肢血管病变/肾脏病变/血糖检查/血脂检查
+    var SelectedRate = []; //选中项的完成率
+    var ScreeningPopulation = 0; //筛查人数（标题）
+
+    $(function(){
+        //遍历所有按钮
+        $('.button-row > .btn-sm').each(function(){
+          if($(this).hasClass("btn-active")){
+              SelectedButton[$(this).index()] = 1;
+          } else {
+              SelectedButton[$(this).index()] = 0;
+          }
+        })
+
+        //左侧tab点击事件
+        $('.left-tab > .btn-sm').click(function(){
+            $(this).addClass("btn-active");
+            $(this).siblings().removeClass("btn-active");
+            var text = $('.left-tab > .btn-active').html()=='全部'?"总":$('.left-tab > .btn-active').html();
+            $('#total-screening-text').html("参加筛选"+text+"人数");
+            LeftTab = $('.left-tab > .btn-active').attr('value');
+            resetButton();
+            getAnalysisData();
+        })
+        //右侧tab点击事件
+        $('.right-tab > .btn-sm').click(function(){
+            $(this).addClass("btn-active");
+            $(this).siblings().removeClass("btn-active");
+            RightTab = $('.right-tab > .btn-active').attr('value');
+            resetButton();
+            getAnalysisData();
+        })
+        //筛选按钮点击事件
+        $('.button-row > .btn-sm').click(function(){
+            if($(this).hasClass("btn-active")) {
+                $(this).removeClass("btn-active");
+                SelectedButton[$(this).index()] = 0;
+            } else {
+                $(this).addClass("btn-active");
+                SelectedButton[$(this).index()] = 1;
+            }
+            if(eval(SelectedButton.join('+')) == 0) { //所有按钮均未选中
+                $('.charts-row').css('display','none');
+                $('.charts-area').css('display','');
+                $('#charts-area-text').html('请选择'+$('.right-tab > .btn-active').html()
+                        +'的项目，可以在筛查过的'+$('.left-tab > .btn-active').html()+
+                        '人数中，查看'+$('.right-tab > .btn-active').html()+'的各项目人数');
+            } else {
+                $('.charts-row').css('display','');
+                $('.charts-area').css('display','none');
+                computeAnalysisRate();
+            }
+        })
+    });
+
+    //获取数据
+    function getAnalysisData(){
+        $.getJSON('api/home/analysis?lefttab='+LeftTab+"&righttab="+RightTab, function(rm) {
+            if(rm.code === 1) {
+                if (rm.result) {
+                    ScreeningPopulation = rm.result['ScreeningPopulation']; //参加筛查总/早发现人数
+                    CountyData = rm.result['countyData'];
+                    CityData = rm.result['cityData'];
+                    //计算完成率
+                    computeAnalysisRate();
+                }
+            }else {
+                toastr(api + '数据获取失败');
+            }
+        });
+    }
+
+    //计算完成率
+    function computeAnalysisRate() {
+        //提取选中按钮数据
+        SelectedRate = [];
+        if(SelectedButton[0] == 1 && SelectedButton[1] == 1) { //周围神经 选中，视网膜 选中
+            Divident = CityData['num'][2];
+            Rate = CityData['rate'][2];
+            for(var i=0; i<CountyData.length; i++) {
+                if(CountyData[i]['county'] != '其它'){
+                    //柱状图数据
+                    SelectedRate.push({county: CountyData[i]['county'],rate:parseInt(CountyData[i]['rate'][2]*100)});
+                }
+            }
+        } else if(SelectedButton[0] == 1 && SelectedButton[1] == 0) { //周围神经 选中，视网膜 未选中
+            Divident = CityData['num'][0];
+            Rate = CityData['rate'][0];
+            for(var i=0; i<CountyData.length; i++) {
+                if(CountyData[i]['county'] != '其它'){
+                    //柱状图数据
+                    SelectedRate.push({county: CountyData[i]['county'],rate:parseInt(CountyData[i]['rate'][0]*100)});
+                }
+            }
+        } else if(SelectedButton[0] == 0 && SelectedButton[1] == 1) {  //周围神经 未选中，视网膜 选中
+            Divident = CityData['num'][1];
+            Rate = CityData['rate'][1];
+            for(var i=0; i<CountyData.length; i++) {
+                if(CountyData[i]['county'] != '其它'){
+                    //柱状图数据
+                    SelectedRate.push({county: CountyData[i]['county'],rate:parseInt(CountyData[i]['rate'][1]*100)});
+                }
+            }
+        } else if(SelectedButton[0] == 0 && SelectedButton[1] == 0) { //周围神经 未选中，视网膜 未选中
+            Divident = 0;
+            Rate = 0;
+            for(var i=0; i<CountyData.length; i++) {
+                if(CountyData[i]['county'] != '其它'){
+                    //柱状图数据
+                    SelectedRate.push({county: CountyData[i]['county'],rate:0});
+                }
+            }
+        }
+        //数据排序
+        rankAnalysisData();
+    }
+
+    //数据排序
+    function rankAnalysisData() {
+        SelectedRate.sort(compareAnalysis('rate'));
+        //table数据渲染
+        renderAnalysisData();
+    }
+
+    //图表数据渲染
+    function renderAnalysisData() {
+        $('#total-screening-population').html(ScreeningPopulation+'人');
+
+        //饼图
+        var pieChart = echarts.init(document.getElementById('pie-chart'));
+        var pieOption = {
+            tooltip: {
+                formatter: function(params) {
+                    if (params.dataIndex == 0) {
+                        return '选中项目筛选人数占比 : ' + params.name;
+                    } else {
+                        return '未选中项目筛选人数占比 : '+Math.round(params.value*100/(Divident+params.value))+'%';
+                    }
+                }
+            },
+            title: {
+                text: '筛查人数\n' + Divident + '人',
+                left: 'center',
+                top: 'middle',
+                textStyle: {
+                    fontSize:'14',
+                    fontWeight: '150',
+                    color: '#718AA6',
+                },
+            },
+            series:[{
+                type: 'pie',
+                radius: ['35%', '70%'],
+                label: {
+                    normal: {
+                        position: 'inner',
+                        textStyle: {
+                            fontSize: '14'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            if (params.dataIndex == 0) {
+                                return '#9b8ac0';
+                            } else {
+                                return '#45c8dc';
+                            }
+                        }
+                    }
+                },
+                data: [
+                    {
+                        value: Divident,
+                        name: parseInt(Rate*100)+'%  '
+                    },
+                    {
+                        value: Divident/Rate-Divident,
+                    }]
+            }]
+        };
+        pieChart.setOption(pieOption);
+        //柱状图
+        var countyArray = [];
+        var rateArray = [];
+        for(var i=0; i<SelectedRate.length; i++) {
+            countyArray.push(SelectedRate[i]['county']);
+            rateArray.push(SelectedRate[i]['rate']);
+        }
+        var title = '';
+        var selected = eval(SelectedButton.join('+'));
+        if(selected == 6) {
+            title = '6项'+$('.left-tab > .btn-active').html()+'筛查用户(完全筛查)占比';
+        } else if(selected == 1) {
+            title = '    ' + $('.button-row').children('.btn-active').html() + $('.left-tab > .btn-active').html()+'筛查用户占比';
+        } else {
+            title = '    以上' + selected + '项'+$('.left-tab > .btn-active').html()+'筛查用户占比'
+        }
+        var barGraph = echarts.init(document.getElementById('bar-graph'));
+        var barOption = {
+            color: ['#5ec3ce'],//柱形图颜色
+            tooltip: {
+                formatter: "{b} : {c} %"
+            },
+            title: {
+                text: title,
+                padding: [15,0,5,190],
+                textStyle: {
+                    color: '#718aa6',
+                    fontSize: '16'
+                }
+            },
+            grid: {
+                top: '25%',//上边距
+                left: '2%',//左边距
+                right: '3%',//右边距
+                bottom: '25%',//下边距
+                containLabel: true,//是否显示y轴坐标
+            },
+            xAxis: {
+                data: countyArray,
+                axisTick: false,  //坐标轴刻度
+                axisLine: {
+                    lineStyle: {
+                        color: '#b3b5ba'
+                    }
+                },
+                axisLabel: {
+                    rotate: 40,
+                    interval: 0,
+                    textStyle: {
+                        color: '#b3b5ba',
+                        fontSize:10
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisTick: false,  //坐标轴刻度
+                axisLine: {
+                    lineStyle: {
+                        color: '#b3b5ba',
+                    },
+                },
+                axisLabel: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        color: '#b3b5ba',
+                        fontSize:10
+                    }
+                },
+                splitNumber: 1,
+                splitLine: {show: false}
+            },
+            series: [{
+                type: 'bar',
+                barWidth: '40%',
+                data: rateArray,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%',
+                        textStyle: {
+                            color: '#666666',
+                            fontSize:10
+                        }
+                    }
+                }
+            }]
+        };
+        barGraph.setOption(barOption);
+    }
+
+    //重置按钮状态
+    function resetButton() {
+        //$('.button-row > .btn-sm').addClass("btn-active");//（所有数据都拿到的时候，执行这行代码）
+        $('.button-row > .btn-sm').each(function(){ //现在只有神经和视网膜数据，disable其他按钮（所有数据都拿到的时候，删除）
+            if($(this).html()=='周围神经病变' || $(this).html()=='视网膜病变') {
+                $(this).addClass("btn-active");
+            }
+        });
+        SelectedButton = [1,1,0,0,0,0];
+        $('.charts-row').css('display','');
+        $('.charts-area').css('display','none');
+    }
+
+    //排序算法(降序排列),property 排序关键字
+    function compareAnalysis(property) {
+        return function(object1,object2) {
+            return object2[property] - object1[property];
+        }
+    }
+
+</script>

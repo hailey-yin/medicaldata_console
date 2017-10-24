@@ -1,0 +1,345 @@
+<style>
+    .modal-title p {
+        font-size: 27px;
+        color: #718aa6;
+        text-align: center;
+    }
+    .modal-title {
+        padding: 24px 0 0 0;
+    }
+
+    .disease-rules {
+        height: 50px;
+        padding: 10px 0 0 230px;
+    }
+
+    .disease-rules .btn {
+        width: 90px;
+        height: 34px;
+        border-radius: 0;
+        font-size: 18px;
+        background-color: #d0e5f7;
+        color: #ffffff;
+        padding-bottom: 5px;
+    }
+
+    .disease-rules .btn:first-child {
+        width: 100px;
+    }
+
+    .disease-rules >.btn-active {
+        background-color: #43b6f5;
+        color: #ffffff;
+    }
+
+    .finish-chart-row {
+        display:inline;
+    }
+
+    #finish-task {
+        width: 860px;
+        height: 300px;
+        float: left;
+    }
+
+    .time-rules {
+        float: left;
+        margin-top: 30px;
+    }
+
+    .time-rules .btn {
+        border-radius: 0;
+        width: 40px;
+        height: 50px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #ffffff;
+        border: 1.5px solid #f0f0f0;
+        color:#718AA6;
+        cursor: pointer;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .time-rules > button > p {
+        padding-top: 10px;
+        padding-left: 8px;
+        writing-mode: vertical-rl;
+    }
+
+    .time-rules > .btn-active {
+        background-color: #d5e3f9;
+    }
+
+    .right-inside-bottom p {
+    padding: 5px 26px;
+    }
+
+
+</style>
+
+<div class="all-top">
+    <div class="modal-title">
+        <p>
+            <span class="model-title-icon"><img src="img/inside/icon3.png" alt="icon"></span><span id ="right-title"> 全市糖尿病并发症筛查完成情况</span>
+        </p>
+    </div>
+    <div class="disease-rules">
+        <button class="btn btn-sm btn-active" value="0">周围神经</button>
+        <button class="btn btn-sm" value="1">血管</button>
+        <button class="btn btn-sm" value="2">视网膜</button>
+        <button class="btn btn-sm" value="3">肾脏</button>
+        <button class="btn btn-sm" value="4">血糖</button>
+        <div id="disease-tag" style="display: none">0</div>
+    </div>
+    <div class="finish-chart-row">
+        <div id="finish-task"></div>
+        <div class="time-rules">
+            <button class="btn btn-sm btn-active" value="MONTH"><p>月</p></button><br>
+            <button class="btn btn-sm" value="QUARTER">季<br>度</button><br>
+            <button class="btn btn-sm" value="YEAR"><p>年</p></button>
+            <div id="time-tag" style="display: none">MONTH</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //初始化页面加载
+    $(function () {
+        getStatusData(0, 'MONTH');
+        //病变tab点击事件
+        $('.disease-rules .btn-sm').click(function(){
+            if(!$(this).hasClass("btn-active")) {
+                $(this).addClass("btn-active");
+                $(this).siblings().removeClass("btn-active");
+            }
+            $('#disease-tag').text($(this).val());
+            var tag2 = $('#time-tag').text();
+            getStatusData(Number($(this).val()),tag2);
+        });
+        //时间tab点击事件
+        $('.time-rules .btn-sm').click(function(){
+            if(!$(this).hasClass("btn-active")) {
+                $(this).addClass("btn-active");
+                $(this).siblings().removeClass("btn-active");
+            }
+            $('#time-tag').text($(this).val());
+            var tag1 = $('#disease-tag').text();
+            getStatusData(Number(tag1),$(this).val());
+        });
+    });
+
+    //获取数据
+    function getStatusData(tag1,tag2) {
+        var county = $('#right-title').text().substr(0,$('#right-title').text().length-12).trim();
+        if(county == "崇明区") {
+            county = "崇明县";
+        }
+        var xdata = [];
+        var ydata = [];
+        $.getJSON( 'api/inside/finished', function(msg) {
+            if(msg.code === 1) {
+                if(county == '全市') {
+                    switch (tag1) {
+                        case 0:
+                            var data = msg.result.allFinishedSJBB;
+                            var name = '全市糖尿病筛查周围神经完成情况';
+                            break;
+                        case 1:
+                            var data = [0,0,0,0,0];
+                            var name = '全市糖尿病筛查血管完成情况';
+                            break;
+                        case 2:
+                            var data = msg.result.allFinishedSWM;
+                            var name = '全市糖尿病筛查视网膜完成情况';
+                            break;
+                        case 3:
+                            var data =[0,0,0,0,0];
+                            var name = '全市糖尿病筛查肾脏完成情况';
+                            break;
+                        case 4:
+                            var data = [0,0,0,0,0];
+                            var name = '全市糖尿病筛查血糖完成情况';
+                            break;
+                    }
+                }else {
+                    switch (tag1) {
+                        case 0:
+                            var data = msg.result.areaFinishedSJBB;
+                            var name = county + '糖尿病筛查周围神经完成情况';
+                            break;
+                        case 1:
+                            var data = [0,0,0,0,0];
+                            var name = county +  '糖尿病筛查血管完成情况';
+                            break;
+                        case 2:
+                            var data = msg.result.areaFinishedSWM;
+                            var name = county +  '糖尿病筛查视网膜完成情况';
+                            break;
+                        case 3:
+                            var data = [0,0,0,0,0];
+                            var name = county +  '糖尿病筛查肾脏完成情况';
+                            break;
+                        case 4:
+                            var data = [0,0,0,0,0];
+                            var name = county +  '糖尿病筛查血糖完成情况';
+                            break;
+                    }
+                }
+                if(data && data.length>0) {
+                    if(county == '全市') {
+                        for (var i = 0; i < data.length; i++) {
+                            if(data[i].flag == tag2) {
+                                if(tag2 == 'MONTH') {
+                                    var year = new Date(data[i].stat_dt).getFullYear() ;
+                                    var month =  (new Date(data[i].stat_dt).getMonth()+1) ;
+                                    xdata.push(+ year + '年'+ month +'月');
+                                }else if(tag2 == 'YEAR') {
+                                    var year = new Date(data[i].stat_dt).getFullYear() ;
+                                    xdata.push(+ year + '年');
+                                }else if(tag2 == 'QUARTER') {
+                                    var qYear = (data[i].stat_dt).substr(0,4);
+                                    var quarter = (data[i].stat_dt).substr(5,1);
+                                    xdata.push(+ qYear +'年'+ quarter +'季度');
+                                }
+                                ydata.push(data[i].per_cnt);
+                            }
+                        }
+                    }else {
+                        for (var i = 0; i < data.length; i++) {
+                            if(data[i].county == county && data[i].flag == tag2) {
+                                if(data[i].flag == tag2) {
+                                    if(tag2 == 'MONTH') {
+                                        var year = new Date(data[i].stat_dt).getFullYear() ;
+                                        var month =  (new Date(data[i].stat_dt).getMonth()+1) ;
+                                        xdata.push(+ year + '年'+ month +'月');
+                                    }else if(tag2 == 'YEAR') {
+                                        var year = new Date(data[i].stat_dt).getFullYear() ;
+                                        xdata.push(+ year + '年');
+                                    }else if(tag2 == 'QUARTER') {
+                                        var qYear = (data[i].stat_dt).substr(0,4);
+                                        var quarter = (data[i].stat_dt).substr(5,1);
+                                        xdata.push(+ qYear +'年'+ quarter +'季度');
+                                    }
+                                }
+                                ydata.push(data[i].per_cnt);
+                            }
+                        }
+                    }
+                    initRightBottomChart(name,xdata.sort(compare),ydata);
+                }
+            }
+        })
+    }
+    //排序方法实现
+    function compare(object1,object2) {
+        var value1 = new Date(object1);
+        var value2 = new Date(object2);
+        if (value2 < value1) {
+            return 1;
+        }
+        else if (value2 > value1) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    //渲染完成情况线形图
+    function initRightBottomChart(name,xdata,ydata) {
+        var finishTask = echarts.init(document.getElementById('finish-task'));
+        var Option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            grid: {
+                top: '11%',
+                left: '7%',
+                right: '4%',
+                bottom: '10%',
+                containLabel: true
+            },
+            dataZoom: [
+                {
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+            ],
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    axisTick: false,
+                    axisLine: {
+                        show: false,
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: 'rgb(136,136,136)'
+                        }
+                    },
+                    data:xdata
+                }
+            ],
+            yAxis : [
+                {
+                    axisTick: false,
+                    type : 'value',
+                    axisLine: {
+                        show: false,
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: 'rgb(136,136,136)'
+                        }
+                    },
+                    splitNumber:10
+                }
+            ],
+            series: [{
+                name: name,
+                type: 'line',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: '#1BA0FC',
+                        }
+                    },
+                },
+                data: ydata,
+                lineStyle: {
+                    normal: {
+                        color: "#1BA0FC",
+                        width: 1
+                    },
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: .3,
+                            color: "#1BA0FC",
+                        }, {
+                            offset: 1,
+                            color: 'rgb(212,231,248)'
+                        }])
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: "#1BA0FC",
+                    }
+                }
+            }]
+        };
+        finishTask.setOption(Option);
+    }
+</script>
